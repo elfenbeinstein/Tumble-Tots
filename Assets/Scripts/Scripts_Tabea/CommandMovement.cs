@@ -23,22 +23,6 @@ public class RotateActor : CommandMovement
     }
 }
 
-public class Jumping : CommandMovement
-{
-    public override void Execute(Actor actor, object param = null)
-    {
-
-    }
-}
-
-public class Dashing : CommandMovement
-{
-    public override void Execute(Actor actor, object param = null)
-    {
-
-    }
-}
-
 public class DoNothing : CommandMovement
 {
     public override void Execute(Actor actor, object param = null)

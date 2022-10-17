@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject player; // find via script later
-    //[SerializeField] private Transform lookAt;
-    //[SerializeField] private Transform camPos;
+    [SerializeField] private Transform lookAt;
+    [SerializeField] private Transform camPos;
 
     [SerializeField] private Vector3 camOffset;
 
