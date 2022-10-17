@@ -15,7 +15,7 @@ public class CameraBehaviour : MonoBehaviour
 
     void Start()
     {
-        camPos = player.GetComponent<Movement>().CamPos();
+        //camPos = player.GetComponent<Movement>().CamPos();
         //gameObject.transform.position = camPos.position;
         verticalRotation = 0;
     }
