@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputHandler : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     bool isAlive;
     CommandMovement keySpace, keyShift;
@@ -21,7 +21,7 @@ public class InputHandler : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
             keySpace.Execute();
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             keyShift.Execute();
