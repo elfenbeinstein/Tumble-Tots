@@ -100,11 +100,11 @@ public class InputHandlerAlive : MonoBehaviour
         if (movementVector.magnitude >= 0.1f)
         {
             targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
-            //targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             keyRotate.Execute(actor, targetAngle);
 
-            //movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
+            movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
 
             if (isSprinting) movementVector *= sprintMultiplier;
 
