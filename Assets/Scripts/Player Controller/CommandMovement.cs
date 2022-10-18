@@ -19,7 +19,7 @@ public class RotateActor : CommandMovement
 {
     public override void Execute(Actor actor, object param = null)
     {
-        actor.cc.transform.rotation = Quaternion.Euler(0f, (float)param, 0f);
+        actor.body.transform.rotation = Quaternion.Euler(0f, (float)param, 0f);
     }
 }
 

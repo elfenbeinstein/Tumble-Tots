@@ -5,6 +5,7 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
     public CharacterController cc;
+    public GameObject body;
 
     private void Awake()
     {
