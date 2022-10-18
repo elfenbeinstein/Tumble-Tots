@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float riseTime;
+    [SerializeField] private float riseAmount;
+    private float timeCounter;
+
+    private void Start()
     {
-        
+        timeCounter = 0;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        timeCounter += Time.deltaTime;
+
+        if (timeCounter >= riseTime)
+        {
+            RaiseLava();
+            timeCounter = 0;
+        }
+    }
+
+    private void RaiseLava()
+    {
+        gameObject.transform.position += new Vector3(0, riseAmount, 0);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<Actor>() != null)
+        {
+            EventSystem.Instance.Fire("PLAYER", "TouchedLava", other.gameObject.GetComponent<Actor>());
+        }
     }
 }

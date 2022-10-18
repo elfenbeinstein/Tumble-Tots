@@ -47,6 +47,13 @@ public class InputHandlerAlive : MonoBehaviour
 
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
+
+        EventSystem.Instance.AddEventListener("PLAYER", PlayerListener);
+    }
+
+    private void OnDestroy()
+    {
+        EventSystem.Instance.RemoveEventListener("PLAYER", PlayerListener);
     }
 
     void Update()
@@ -141,5 +148,14 @@ public class InputHandlerAlive : MonoBehaviour
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+
+    private void PlayerListener(string eventName, object param)
+    {
+        if (eventName == "TouchedLava")
+        {
+            isAlive = false;
+            Debug.Log("Player touched lava");
+        }
     }
 }
