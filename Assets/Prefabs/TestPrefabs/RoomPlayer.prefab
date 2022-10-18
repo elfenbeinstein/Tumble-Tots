@@ -64,3 +64,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  playerTypes:
+  - {fileID: 3860709792721950553, guid: 2995affee036f7a408d7520fe7725ab6, type: 3}

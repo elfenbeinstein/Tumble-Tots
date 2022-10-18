@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 348197748}
   m_Layer: 0
   m_Name: NetworkManager
-  m_TagString: Untagged
+  m_TagString: NetworkManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,7 +387,7 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs: []
   menuScene: Assets/Scenes/Lobby.unity
-  roomPlayerPrefab: {fileID: 7626337139698739103, guid: 2995affee036f7a408d7520fe7725ab6, type: 3}
+  roomPlayerPrefab: {fileID: 392018158791181946, guid: 3ff6e9306704c5e43b9a85feadb88a61, type: 3}
 --- !u!114 &348197748
 MonoBehaviour:
   m_ObjectHideFlags: 0
