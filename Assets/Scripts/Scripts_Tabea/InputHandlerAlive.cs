@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class InputHandlerAlive : MonoBehaviour
 {
+    [SerializeField] private Transform cam;
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
-    [SerializeField] private Transform cam;
 
     bool isAlive;
     CommandMovement keyMove, keyRotate;
@@ -30,11 +30,20 @@ public class InputHandlerAlive : MonoBehaviour
     [SerializeField] private float jumpHeight;
     private bool canDoubleJump;
 
+    [Space]
+    [Header("Dashing related variables")]
+    [SerializeField] private float dashForce = 24f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 1f;
+    private bool canDash;
+
     void Start()
     {
         //cam = Camera.main.transform;
 
         isAlive = true;
+        isSprinting = false;
+        canDash = true;
 
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
@@ -47,16 +56,20 @@ public class InputHandlerAlive : MonoBehaviour
 
     private void HandleInput()
     {
+        /* -- obsolete no Sprinting, instead we dash
         // Sprint:
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             isSprinting = true;
         if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
             isSprinting = false;
+        */
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+            if (canDash) StartCoroutine(Dashing());
 
         PlayerMovement();
 
         isGrounded = Physics.CheckSphere(playerFeet.position, 0.3f, groundCheckMask);
-
         if (isGrounded && verticalVelocity.y < 0)
         {
             verticalVelocity.y = -2f;
@@ -79,11 +92,12 @@ public class InputHandlerAlive : MonoBehaviour
 
         if (movementVector.magnitude >= 0.1f)
         {
-            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
+            //targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             keyRotate.Execute(actor, targetAngle);
 
-            movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
+            //movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
 
             if (isSprinting) movementVector *= sprintMultiplier;
 
@@ -106,5 +120,26 @@ public class InputHandlerAlive : MonoBehaviour
                 canDoubleJump = false;
             }
         }
+    }
+
+    IEnumerator Dashing()
+    {
+        StartCoroutine(DashCoolDown());
+
+        float startTime = Time.time;
+
+        while (Time.time < startTime + dashDuration)
+        {
+            keyMove.Execute(actor, movementVector * dashForce * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    IEnumerator DashCoolDown()
+    {
+        canDash = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 }
