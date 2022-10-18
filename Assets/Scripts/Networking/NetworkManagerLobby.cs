@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManagerLobby : NetworkManager
 {
-    [Scene] [SerializeField] private string menuScene = string.Empty;
+    [SerializeField] private string menuScene = string.Empty;
 
     [Header("Room")]
     [SerializeField] private NetworkRoomPlayer roomPlayerPrefab = null;
@@ -61,6 +61,11 @@ public class NetworkManagerLobby : NetworkManager
 
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
         }
+    }
+
+    public void StartGame()
+    {
+        ServerChangeScene("Xavi_Test");
     }
 
 }
