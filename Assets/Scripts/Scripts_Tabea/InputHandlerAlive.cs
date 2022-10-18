@@ -7,7 +7,7 @@ public class InputHandlerAlive : MonoBehaviour
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
-    private Transform cam;
+    [SerializeField] private Transform cam;
 
     bool isAlive;
     CommandMovement keyMove, keyRotate;
@@ -32,7 +32,7 @@ public class InputHandlerAlive : MonoBehaviour
 
     void Start()
     {
-        cam = Camera.main.transform;
+        //cam = Camera.main.transform;
 
         isAlive = true;
 

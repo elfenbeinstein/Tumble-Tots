@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputHandler : MonoBehaviour
+public class InputHandlerDead : MonoBehaviour
 {
     public Actor actor;
     public Command keyQ, keyW, keyE, keyA, keyS, keyD;
