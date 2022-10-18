@@ -154,8 +154,11 @@ public class InputHandlerAlive : MonoBehaviour
     {
         if (eventName == "TouchedLava")
         {
-            isAlive = false;
-            Debug.Log("Player touched lava");
+            if ((Actor)param == actor)
+            {
+                isAlive = false;
+                Debug.Log("Player touched lava");
+            }
         }
     }
 }
