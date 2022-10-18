@@ -297,7 +297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0d79c8b24979e4fbf50a147bffbde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cc: {fileID: 0}
+  cc: {fileID: 2198165985575189073}
+  body: {fileID: 2198165984946514824}
 --- !u!1 &6701016751703355312
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,10 +343,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d972e658573324b8a31b18e746de28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 342428880182574277}
   actor: {fileID: 2198165985575189072}
   movementSpeed: 6
   turnSmoothTime: 0.1
-  cam: {fileID: 342428880182574277}
   sprintMultiplier: 2.01
   playerFeet: {fileID: 2198165984974930715}
   isGrounded: 0
@@ -353,6 +354,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   jumpHeight: 1
+  dashForce: 24
+  dashDuration: 0.2
+  dashCooldown: 1
 --- !u!1 &8157464129603164081
 GameObject:
   m_ObjectHideFlags: 0

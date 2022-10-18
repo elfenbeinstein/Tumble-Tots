@@ -1068,6 +1068,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tot2
       objectReference: {fileID: 0}
+    - target: {fileID: 5504474323813193049, guid: 7277ae9c03094b344aaad43768fb9b30, type: 3}
+      propertyPath: field of view
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504474323813193049, guid: 7277ae9c03094b344aaad43768fb9b30, type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504474323813193049, guid: 7277ae9c03094b344aaad43768fb9b30, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504474323813193049, guid: 7277ae9c03094b344aaad43768fb9b30, type: 3}
+      propertyPath: orthographic size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6701016751703355312, guid: 7277ae9c03094b344aaad43768fb9b30, type: 3}
       propertyPath: m_Name
       value: Alive_Input
