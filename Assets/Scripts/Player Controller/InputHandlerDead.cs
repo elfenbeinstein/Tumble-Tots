@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InputHandlerDead : MonoBehaviour
 {
+    [SerializeField] private Transform cam;
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -36,7 +37,7 @@ public class InputHandlerDead : MonoBehaviour
 
         if (movementVector.magnitude >= 0.1f)
         {
-            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
+            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             keyRotate.Execute(actor, targetAngle);
 
