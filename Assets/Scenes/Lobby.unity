@@ -382,10 +382,11 @@ MonoBehaviour:
   networkAddress: localhost
   maxConnections: 8
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 3860709792721950553, guid: 2995affee036f7a408d7520fe7725ab6, type: 3}
+  playerPrefab: {fileID: 14428017742519333, guid: 3ff6e9306704c5e43b9a85feadb88a61, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 3860709792721950553, guid: 2995affee036f7a408d7520fe7725ab6, type: 3}
   menuScene: Assets/Scenes/Lobby.unity
   roomPlayerPrefab: {fileID: 392018158791181946, guid: 3ff6e9306704c5e43b9a85feadb88a61, type: 3}
 --- !u!114 &348197748
@@ -497,14 +498,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 348197747}
         m_TargetAssemblyTypeName: NetworkManagerLobby, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 1
+        m_MethodName: LoadLevel
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Xavi_Test
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &493079740
@@ -3316,7 +3317,7 @@ GameObject:
   - component: {fileID: 2123472273}
   m_Layer: 5
   m_Name: UI
-  m_TagString: Untagged
+  m_TagString: LobbyUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

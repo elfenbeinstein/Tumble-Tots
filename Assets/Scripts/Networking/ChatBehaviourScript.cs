@@ -53,7 +53,7 @@ public class ChatBehaviourScript : NetworkBehaviour
     [Command]
     private void CmdSendMessage(string message)
     {
-        RpcHandleMessage($"[{PlayerPrefs.GetString(PlayerPrefsNameKey, "FawnAllow")}]: {message}");
+        RpcHandleMessage($"[{PlayerPrefs.GetString(PlayerPrefsNameKey, "FawnAlloy")}]: {message}");
     }
 
     [ClientRpc]

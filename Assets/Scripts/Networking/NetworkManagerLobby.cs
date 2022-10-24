@@ -1,6 +1,7 @@
 using Mirror;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,7 @@ public class NetworkManagerLobby : NetworkManager
 
     [Header("Room")]
     [SerializeField] private NetworkRoomPlayer roomPlayerPrefab = null;
+    NetworkConnectionToClient lobbyConnection;
 
     public static event Action OnClientConnected;
     public static event Action OnClientDisconnected;
@@ -61,13 +63,21 @@ public class NetworkManagerLobby : NetworkManager
 
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
 
+            roomPlayerInstance.setConnection(conn);
             roomPlayerInstance.AddLobbyCharacter();
+
+            if(lobbyConnection == null) { lobbyConnection = conn; }
+
         }
     }
 
-    public void StartGame()
+    public void LoadLevel(string levelName)
     {
-        ServerChangeScene("Xavi_Test");
-    }
+        foreach (KeyValuePair<int, NetworkConnectionToClient> player in NetworkServer.connections)
+        {
+            player.Value.identity.GetComponentInParent<NetworkRoomPlayer>().RemoveAllChildren();
+        }
 
+        ServerChangeScene(levelName);
+    }
 }
