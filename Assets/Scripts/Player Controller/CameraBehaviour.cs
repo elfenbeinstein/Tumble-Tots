@@ -17,7 +17,7 @@ public class CameraBehaviour : MonoBehaviour
 
     private void CamControl()
     {
-        transform.position = player.transform.position + camOffset;
+        //transform.position = player.transform.position + camOffset;
         //transform.position = camPos.position;
         //transform.LookAt(lookAt);
     }
