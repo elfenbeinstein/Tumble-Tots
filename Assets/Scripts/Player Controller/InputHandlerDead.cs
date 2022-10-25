@@ -23,6 +23,8 @@ public class InputHandlerDead : MonoBehaviour
         //keyDeadMove = new FlyDead();
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
+
+        Cursor.visible = false;
     }
 
     void Update()

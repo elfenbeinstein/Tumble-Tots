@@ -49,6 +49,7 @@ public class InputHandlerAlive : MonoBehaviour
         keyRotate = new RotateActor();
 
         EventSystem.Instance.AddEventListener("PLAYER", PlayerListener);
+        Cursor.visible = false;
     }
 
     private void OnDestroy()
