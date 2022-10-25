@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 392018158791181946}
   m_Layer: 0
   m_Name: RoomPlayer
-  m_TagString: Untagged
+  m_TagString: PlayerHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,3 +64,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  playerTypes:
+  - {fileID: 3860709792721950553, guid: 2995affee036f7a408d7520fe7725ab6, type: 3}
+  - {fileID: 3996105734488965044, guid: 85d120a942b50554fbbb29da34d615f6, type: 3}
