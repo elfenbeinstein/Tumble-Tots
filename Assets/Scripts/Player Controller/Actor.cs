@@ -6,6 +6,7 @@ public class Actor : MonoBehaviour
 {
     public CharacterController cc;
     public GameObject body;
+    public Vector3 projectileSpawn;
 
     private void Awake()
     {

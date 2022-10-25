@@ -419,6 +419,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream
+=======
+    - target: {fileID: 357162088, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
+      propertyPath: m_YAxis.m_InvertInput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618918814, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000016209496
+      objectReference: {fileID: 0}
+    - target: {fileID: 618918814, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000000005771645
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040032740, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.00000002277142
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040032740, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000000008577956
+      objectReference: {fileID: 0}
+>>>>>>> Stashed changes
     - target: {fileID: 1287780329, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.000000016311532
@@ -426,6 +449,17 @@ PrefabInstance:
     - target: {fileID: 1287780329, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.0000000054766307
+<<<<<<< Updated upstream
+=======
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907976451115217510, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000032418992
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907976451115217510, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000000011543292
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 6313953683242780156, guid: ad031c6394a88c0458690c985a297dd5, type: 3}
       propertyPath: m_Name

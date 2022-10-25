@@ -10,7 +10,7 @@ public class InputHandlerDead : MonoBehaviour
     [SerializeField] private float turnSmoothTime = 0.1f;
 
     bool isAlive;
-    CommandMovement keyMove, keyRotate, keyDeadMove;
+    CommandMovement keyMove, keyRotate, keyShoot;
 
     private float moveX, moveZ;
     private Vector3 movementVector;
@@ -18,11 +18,19 @@ public class InputHandlerDead : MonoBehaviour
     private float turnSmoothVelocity;
     private float flyDirection;
 
+    public GameObject projectile;
+
     void Start()
     {
         //keyDeadMove = new FlyDead();
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
+<<<<<<< Updated upstream
+=======
+        keyShoot = new Shoot();
+
+        Cursor.visible = false;
+>>>>>>> Stashed changes
     }
 
     void Update()
@@ -40,6 +48,11 @@ public class InputHandlerDead : MonoBehaviour
         if (Input.GetKey(KeyCode.Q)) flyDirection = 1;
         else if (Input.GetKey(KeyCode.E)) flyDirection = -1;
         else flyDirection = 0;
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            keyShoot.Execute(actor, projectile);
+        }
 
         //if (movementVector.magnitude > 1) movementVector = movementVector.normalized; 
 
