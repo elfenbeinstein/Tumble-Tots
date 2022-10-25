@@ -15,6 +15,14 @@ public class MoveActor : CommandMovement
     }
 }
 
+public class FlyDead : CommandMovement
+{
+    public override void Execute(Actor actor, object param = null)
+    {
+        actor.transform.Translate((Vector3)param, Space.World);
+    }
+}
+
 public class RotateActor : CommandMovement
 {
     public override void Execute(Actor actor, object param = null)

@@ -49,6 +49,7 @@ public class InputHandlerAlive : MonoBehaviour
         keyRotate = new RotateActor();
 
         EventSystem.Instance.AddEventListener("PLAYER", PlayerListener);
+        Cursor.visible = false;
     }
 
     private void OnDestroy()
@@ -99,7 +100,7 @@ public class InputHandlerAlive : MonoBehaviour
 
         if (movementVector.magnitude >= 0.1f)
         {
-            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
+            //targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
             targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             keyRotate.Execute(actor, targetAngle);
