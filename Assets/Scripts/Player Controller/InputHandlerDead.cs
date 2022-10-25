@@ -10,8 +10,7 @@ public class InputHandlerDead : MonoBehaviour
     [SerializeField] private float turnSmoothTime = 0.1f;
 
     bool isAlive;
-    CommandMovement keyMove, keyRotate;
-    CommandDeadMovement keyDeadMove;
+    CommandMovement keyMove, keyRotate, keyDeadMove;
 
     private float moveX, moveZ;
     private Vector3 movementVector;
@@ -21,7 +20,7 @@ public class InputHandlerDead : MonoBehaviour
 
     void Start()
     {
-        keyDeadMove = new MoveDead();
+        //keyDeadMove = new FlyDead();
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
     }
