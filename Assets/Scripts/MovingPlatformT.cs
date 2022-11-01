@@ -11,7 +11,6 @@ public class MovingPlatformT : MonoBehaviour
 
     void Start()
     {
-        gameObject.transform.position = pos1.position;
         up = true;
     }
 
