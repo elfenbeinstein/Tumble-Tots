@@ -9,9 +9,17 @@ public class MovingPlatformT : MonoBehaviour
     [SerializeField] private Vector3 direction;
     bool up;
 
+    // stuff to move player:
+    bool carriesPlayer;
+    List<Actor> players;
+    private CommandMovement movePlayer;
+
     void Start()
     {
         up = true;
+        carriesPlayer = false;
+        players = new List<Actor>();
+        movePlayer = new MoveActor();
     }
 
     void Update()
@@ -23,6 +31,14 @@ public class MovingPlatformT : MonoBehaviour
             {
                 up = false;
             }
+
+            if (carriesPlayer)
+            {
+                for (int i = players.Count - 1; i >= 0; i--)
+                {
+                    movePlayer.Execute(players[i], (direction / 1000));
+                }
+            }
         }
         else
         {
@@ -31,6 +47,34 @@ public class MovingPlatformT : MonoBehaviour
             {
                 up = true;
             }
+
+            if (carriesPlayer)
+            {
+                for (int i = players.Count - 1; i >= 0; i--)
+                {
+                    movePlayer.Execute(players[i], (-1 * direction / 1000));
+                }
+            }
         }
+
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Actor>() != null)
+        {
+            players.Add(other.GetComponent<Actor>());
+            carriesPlayer = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Actor>() != null)
+        {
+            players.Remove(other.GetComponent<Actor>());
+        }
+        if (players.Count == 0) carriesPlayer = false;
     }
 }

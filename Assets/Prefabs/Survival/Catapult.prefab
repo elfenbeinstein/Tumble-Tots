@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e49c317c81f4494489454895bd7893e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwDuration: 140
-  force: 20
+  throwDuration: 160
+  force: 40
   target: {fileID: 5085821867657033799}
   direction: {x: 0, y: 0, z: 0}
 --- !u!1 &5085821866842277180
