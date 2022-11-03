@@ -11,14 +11,14 @@ public class Lava : MonoBehaviour
     private void Start()
     {
         timeCounter = 0;
-
+        riseAmount /= 100;
     }
 
     void Update()
     {
         timeCounter += Time.deltaTime;
 
-        if (timeCounter >= riseTime)
+        if (timeCounter >= riseTime/100)
         {
             RaiseLava();
             timeCounter = 0;
