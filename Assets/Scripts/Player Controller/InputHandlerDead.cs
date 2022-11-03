@@ -39,8 +39,8 @@ public class InputHandlerDead : MonoBehaviour
         moveZ = Input.GetAxis("Vertical");
         movementVector = new Vector3(moveX, 0f, moveZ);
 
-        if (Input.GetKey(KeyCode.Q)) flyDirection = 1;
-        else if (Input.GetKey(KeyCode.E)) flyDirection = -1;
+        if (Input.GetKey(KeyCode.E)) flyDirection = 1;
+        else if (Input.GetKey(KeyCode.Q)) flyDirection = -1;
         else flyDirection = 0;
 
         //if (movementVector.magnitude > 1) movementVector = movementVector.normalized; 
