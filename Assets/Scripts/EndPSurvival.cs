@@ -37,6 +37,7 @@ public class EndPSurvival : MonoBehaviour
             {
                 movePlayer.Execute(players[i], direction / 1000);
             }
+
             if (Vector3.Distance(gameObject.transform.position, endPosition) < 0.3f)
             {
                 shouldMoveUp = false;
@@ -61,6 +62,7 @@ public class EndPSurvival : MonoBehaviour
         {
             players.Add(other.GetComponent<Actor>());
             carriesPlayer = true;
+            StopCoroutine(WaitForDown());
             StartCoroutine(WaitForUp());
         }
     }
@@ -74,6 +76,7 @@ public class EndPSurvival : MonoBehaviour
         if (players.Count == 0)
         {
             carriesPlayer = false;
+            StopAllCoroutines();
             StartCoroutine(WaitForDown());
         }
     }
@@ -87,6 +90,7 @@ public class EndPSurvival : MonoBehaviour
     IEnumerator WaitForDown()
     {
         yield return new WaitForSeconds(2);
+        shouldMoveUp = false;
         shouldMoveDown = true;
     }
 }
