@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed, duration, force;
+    public float speed, duration, force, pushDuration;
     private CommandMovement movePlayer;
     public Actor actor;
+    bool push;
+    float timePassed;
 
     private void Start()
     {
@@ -23,12 +25,13 @@ public class Projectile : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            Debug.Log("Player hit");
             //Push Player back
+
             actor = collision.gameObject.GetComponent<Actor>();
             Vector3 pushDirection = collision.transform.position - transform.position;
             pushDirection.Normalize();
-            collision.gameObject.GetComponent<InputHandlerAlive>().Push(pushDirection * force * Time.deltaTime);
+
+            collision.gameObject.GetComponent<InputHandlerAlive>().Push(pushDirection * force * Time.deltaTime, pushDuration);
         }
         Destroy(gameObject);
     }

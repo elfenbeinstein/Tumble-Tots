@@ -37,6 +37,8 @@ public class InputHandlerAlive : MonoBehaviour
     [SerializeField] private float dashCooldown = 1f;
     private bool canDash;
 
+    public float pushBackDuration;
+
     void Start()
     {
         //cam = Camera.main.transform;
@@ -163,8 +165,19 @@ public class InputHandlerAlive : MonoBehaviour
         }
     }
 
-    public void Push(Vector3 direction)
+    public void Push(Vector3 direction, float duration)
     {
-        keyMove.Execute(actor, direction);
+        StartCoroutine(PushBack(direction, duration));
+    }
+
+    IEnumerator PushBack(Vector3 direction, float duration)
+    {
+        float startTime = Time.time;
+
+        while (Time.time < startTime + duration)
+        {
+            keyMove.Execute(actor, direction);
+            yield return null;
+        }
     }
 }
