@@ -162,4 +162,9 @@ public class InputHandlerAlive : MonoBehaviour
             }
         }
     }
+
+    public void Push(Vector3 direction)
+    {
+        keyMove.Execute(actor, direction);
+    }
 }
