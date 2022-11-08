@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 348197749}
   - component: {fileID: 348197747}
   - component: {fileID: 348197748}
+  - component: {fileID: 348197750}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: NetworkManager
@@ -384,9 +385,25 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 14428017742519333, guid: 3ff6e9306704c5e43b9a85feadb88a61, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 3860709792721950553, guid: 2995affee036f7a408d7520fe7725ab6, type: 3}
+  - {fileID: 2198165985575189082, guid: 5dbb4d4b1d7ff0c4cb749326a79afe15, type: 3}
+  - {fileID: 479745952703944561, guid: bba3d86447410c246892e60ae2503d46, type: 3}
+  - {fileID: 7992412510714384206, guid: a361f481b67616b4ca75c8ae6ab4b6c9, type: 3}
+  roundNumber: 0
+  numberOfQualifiers: 0
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  players: []
+  levelNames: []
   menuScene: Assets/Scenes/Lobby.unity
   roomPlayerPrefab: {fileID: 392018158791181946, guid: 3ff6e9306704c5e43b9a85feadb88a61, type: 3}
 --- !u!114 &348197748
@@ -433,6 +450,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &348197750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348197746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d271ebf41bf6749b6f89535ce499be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &493079738
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +534,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Xavi_Test
+          m_StringArgument: Race_Obstacles
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &493079740
