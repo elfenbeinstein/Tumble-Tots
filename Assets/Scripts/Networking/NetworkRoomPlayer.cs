@@ -6,6 +6,7 @@ public class NetworkRoomPlayer : NetworkBehaviour
 {
     [SerializeField] GameObject[] playerTypes; //Different player prefabs
     private GameObject currentPlayerPrefab; //Current player prefab attatched
+    public string playerID;
 
     NetworkConnectionToClient conn;
 
@@ -32,5 +33,24 @@ public class NetworkRoomPlayer : NetworkBehaviour
         currentPlayerPrefab.transform.parent = gameObject.transform; //Spawn and child player gameobject
 
         NetworkServer.ReplacePlayerForConnection(conn, currentPlayerPrefab); //Re-route current connection to lobby player gameobject
+    }
+
+    public void SpawnAliveTot()
+    {
+        currentPlayerPrefab = Instantiate(playerTypes[1], this.transform.position, this.transform.rotation);
+        currentPlayerPrefab.transform.parent = gameObject.transform;
+
+        NetworkServer.ReplacePlayerForConnection(conn, currentPlayerPrefab);
+        //currentPlayerPrefab.GetComponent<InputHandlerAlive>().
+    }
+
+    public void SpawnTotWithTheJordans()
+    {
+
+    }
+
+    public void SpawnDeadTot()
+    {
+
     }
 }
