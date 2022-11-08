@@ -204,8 +204,9 @@ GameObject:
   - component: {fileID: 479745952703944570}
   - component: {fileID: 479745952703944571}
   - component: {fileID: 7394044721462385705}
+  - component: {fileID: -91307996145658439}
   m_Layer: 0
-  m_Name: Tot_Test_Epic
+  m_Name: Tot_With_Jordans
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,6 +289,24 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 1
   pushBackDuration: 0
+  playerID: 
+--- !u!114 &-91307996145658439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479745952703944561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: bba3d86447410c246892e60ae2503d46
+  hasSpawned: 0
 --- !u!1 &651197991034087670
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,7 +1014,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7396094669009380391}
-  m_LocalRotation: {x: 0.2680322, y: -0.60782987, z: 0.22896847, w: 0.7115301}
+  m_LocalRotation: {x: 0.26803216, y: -0.6078299, z: 0.22896852, w: 0.71153}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

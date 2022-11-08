@@ -7,6 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManagerLobby : NetworkManager
 {
+    //Game Manager
+    [SerializeField] List<NetworkRoomPlayer> players;
+    [SerializeField] GameObject[] spawnPoints = new GameObject[8];
+    [SerializeField] List<GameObject> registeredObjects;
+    [SerializeField] int roundNumber;
+
+
+    //Network Manager
     [SerializeField] private string menuScene = string.Empty;
     
     [Header("Room")]
@@ -17,6 +25,15 @@ public class NetworkManagerLobby : NetworkManager
     public static event Action OnClientDisconnected;
 
     public override void OnStartServer() => spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
+
+    private void Start()
+    {
+        registeredObjects.Clear();
+        foreach(GameObject rObject in spawnPrefabs)
+        {
+            registeredObjects.Add(rObject);
+        }
+    }
 
     public override void OnStartClient()
     {
@@ -62,8 +79,9 @@ public class NetworkManagerLobby : NetworkManager
             NetworkRoomPlayer roomPlayerInstance = Instantiate(roomPlayerPrefab);
 
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
-            //Give player ID
+            //Give player ID & add to list
             roomPlayerInstance.playerID = $"{NetworkServer.connections.Count}";
+            players.Add(roomPlayerInstance);
 
             roomPlayerInstance.setConnection(conn);
             roomPlayerInstance.AddLobbyCharacter();
@@ -81,5 +99,44 @@ public class NetworkManagerLobby : NetworkManager
         }
 
         ServerChangeScene(levelName);
+    }
+
+
+
+
+    //Game manager-related code
+
+    private void OnLevelWasLoaded(int level)
+    {
+        Initialize();
+    }
+
+    void Initialize() //Get spawnpoints, update round counter
+    {
+        roundNumber++;
+
+        spawnPrefabs.Clear();
+        foreach(GameObject rObject in registeredObjects)
+        {
+            spawnPrefabs.Add(rObject);
+        }
+
+        //Get spawnpoints
+        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnP");
+
+        SpawnPlayers();
+    }
+
+    void SpawnPlayers()
+    {
+        int i = 0;
+        foreach(NetworkRoomPlayer player in players)
+        {
+            GameObject newPlayer = Instantiate(player.playerTypes[1], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
+            NetworkServer.Spawn(newPlayer);
+            player.currentPlayerPrefab = newPlayer;
+            NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
+            i++;
+        }
     }
 }

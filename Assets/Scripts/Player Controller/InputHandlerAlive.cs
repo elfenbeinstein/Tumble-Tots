@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class InputHandlerAlive : MonoBehaviour
+public class InputHandlerAlive : NetworkBehaviour
 {
-    [SerializeField] private Transform cam;
+    [SerializeField] private GameObject cam;
+    [SerializeField] private GameObject camToSpawn;
+    [SerializeField] private Transform camPivot;
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -42,7 +45,13 @@ public class InputHandlerAlive : MonoBehaviour
 
     void Start()
     {
-        //cam = Camera.main.transform;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        if (isLocalPlayer)
+        {
+            cam = Instantiate(camToSpawn, camPivot.position, camPivot.rotation);
+            cam.transform.parent = camPivot.transform;
+        }
 
         isAlive = true;
         isSprinting = false;
@@ -74,24 +83,26 @@ public class InputHandlerAlive : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
             isSprinting = false;
         */
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-            if (canDash) StartCoroutine(Dashing());
-
-        PlayerMovement();
-
-        isGrounded = Physics.CheckSphere(playerFeet.position, 0.3f, groundCheckMask);
-        if (isGrounded && verticalVelocity.y < 0)
+        if (isLocalPlayer)
         {
-            verticalVelocity.y = -2f;
-            canDoubleJump = true;
-        }
-        else
-            verticalVelocity.y += gravity * Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+                if (canDash) StartCoroutine(Dashing());
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            PlayerJump();
-        keyMove.Execute(actor, verticalVelocity * Time.deltaTime);
+            PlayerMovement();
+
+            isGrounded = Physics.CheckSphere(playerFeet.position, 0.3f, groundCheckMask);
+            if (isGrounded && verticalVelocity.y < 0)
+            {
+                verticalVelocity.y = -2f;
+                canDoubleJump = true;
+            }
+            else
+                verticalVelocity.y += gravity * Time.deltaTime;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+                PlayerJump();
+            keyMove.Execute(actor, verticalVelocity * Time.deltaTime);
+        }
     }
 
     private void PlayerMovement()
@@ -104,7 +115,7 @@ public class InputHandlerAlive : MonoBehaviour
         if (movementVector.magnitude >= 0.1f)
         {
             //targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
-            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             keyRotate.Execute(actor, targetAngle);
 

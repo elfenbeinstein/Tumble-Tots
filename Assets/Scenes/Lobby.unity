@@ -387,6 +387,13 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 3860709792721950553, guid: 2995affee036f7a408d7520fe7725ab6, type: 3}
+  - {fileID: 2198165985575189082, guid: 5dbb4d4b1d7ff0c4cb749326a79afe15, type: 3}
+  - {fileID: 479745952703944561, guid: bba3d86447410c246892e60ae2503d46, type: 3}
+  - {fileID: 7992412510714384206, guid: a361f481b67616b4ca75c8ae6ab4b6c9, type: 3}
+  players: []
+  spawnPoints: []
+  registeredObjects: []
+  roundNumber: 0
   menuScene: Assets/Scenes/Lobby.unity
   roomPlayerPrefab: {fileID: 392018158791181946, guid: 3ff6e9306704c5e43b9a85feadb88a61, type: 3}
 --- !u!114 &348197748
@@ -505,7 +512,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Xavi_Test
+          m_StringArgument: Race_Obstacles
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &493079740

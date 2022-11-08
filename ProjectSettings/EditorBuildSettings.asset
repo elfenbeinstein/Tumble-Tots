@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Xavi_Test.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Race_Obstacles.unity
+    guid: a8a8c896167530e4abc30fbfcfc81c04
   m_configObjects: {}
