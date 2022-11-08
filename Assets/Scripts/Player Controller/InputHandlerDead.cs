@@ -35,7 +35,6 @@ public class InputHandlerDead : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(movementVector.y + ";" +  flyDirection);
         PlayerMovement();
         Shooting();
     }

@@ -33,6 +33,8 @@ public class Projectile : MonoBehaviour
 
             collision.gameObject.GetComponent<InputHandlerAlive>().Push(pushDirection * force * Time.deltaTime, pushDuration);
         }
-        Destroy(gameObject);
+        
+        if (collision.gameObject.GetComponent<InputHandlerDead>() == null)
+            Destroy(gameObject);
     }
 }
