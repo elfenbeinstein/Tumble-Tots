@@ -4,15 +4,10 @@ using System;
 
 public class NetworkRoomPlayer : NetworkBehaviour
 {
-<<<<<<< Updated upstream
-    [SerializeField] GameObject[] playerTypes; //Different player prefabs
-    private GameObject currentPlayerPrefab; //Current player prefab attatched
-=======
     public GameObject[] playerTypes; //Different player prefabs
     public GameObject currentPlayerPrefab; //Current player prefab attatched
     public string playerID;
     public bool isDead = false;
->>>>>>> Stashed changes
 
     public NetworkConnectionToClient conn;
 

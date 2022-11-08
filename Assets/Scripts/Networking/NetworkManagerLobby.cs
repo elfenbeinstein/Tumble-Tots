@@ -74,12 +74,9 @@ public class NetworkManagerLobby : NetworkManager
             NetworkRoomPlayer roomPlayerInstance = Instantiate(roomPlayerPrefab);
 
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
-<<<<<<< Updated upstream
-=======
 
             //Give player ID
             roomPlayerInstance.playerID = $"{NetworkServer.connections.Count}";
->>>>>>> Stashed changes
 
             //Add player to game manager list
             AddPlayer(roomPlayerInstance);
