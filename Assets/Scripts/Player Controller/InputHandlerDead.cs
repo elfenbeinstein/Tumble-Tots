@@ -9,28 +9,34 @@ public class InputHandlerDead : MonoBehaviour
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
 
-    bool isAlive;
-    CommandMovement keyMove, keyRotate, keyDeadMove;
+    bool canShoot;
+
+    CommandMovement keyMove, keyRotate, keyShoot;
 
     private float moveX, moveZ;
     private Vector3 movementVector;
     private float targetAngle, angle;
     private float turnSmoothVelocity;
     private float flyDirection;
+    public float cooldown;
+
+    public GameObject projectile;
 
     void Start()
     {
-        //keyDeadMove = new FlyDead();
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
+        keyShoot = new Shooting();
 
         Cursor.visible = false;
+
+        canShoot = true;
     }
 
     void Update()
     {
-        Debug.Log(movementVector.y + ";" +  flyDirection);
         PlayerMovement();
+        Shooting();
     }
 
     private void PlayerMovement()
@@ -39,8 +45,8 @@ public class InputHandlerDead : MonoBehaviour
         moveZ = Input.GetAxis("Vertical");
         movementVector = new Vector3(moveX, 0f, moveZ);
 
-        if (Input.GetKey(KeyCode.Q)) flyDirection = 1;
-        else if (Input.GetKey(KeyCode.E)) flyDirection = -1;
+        if (Input.GetKey(KeyCode.E)) flyDirection = 1;
+        else if (Input.GetKey(KeyCode.Q)) flyDirection = -1;
         else flyDirection = 0;
 
         //if (movementVector.magnitude > 1) movementVector = movementVector.normalized; 
@@ -62,5 +68,21 @@ public class InputHandlerDead : MonoBehaviour
         {
             keyMove.Execute(actor, Vector3.up * flyDirection * movementSpeed * Time.deltaTime);
         }
+    }
+
+    public void Shooting()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && canShoot == true)
+        {
+            keyShoot.Execute(actor, projectile);
+            canShoot = false;
+            StartCoroutine(Cooldown());
+        }
+    }
+
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(cooldown);
+        canShoot = true;
     }
 }

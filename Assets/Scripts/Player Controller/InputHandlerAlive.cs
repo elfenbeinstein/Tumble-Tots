@@ -37,6 +37,9 @@ public class InputHandlerAlive : MonoBehaviour
     [SerializeField] private float dashCooldown = 1f;
     private bool canDash;
 
+    public float pushBackDuration;
+    public string playerID;
+
     void Start()
     {
         //cam = Camera.main.transform;
@@ -48,13 +51,13 @@ public class InputHandlerAlive : MonoBehaviour
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
 
-        EventSystem.Instance.AddEventListener("PLAYER", PlayerListener);
+        EventSystem.Instance.AddEventListener(playerID, PlayerListener);
         Cursor.visible = false;
     }
 
     private void OnDestroy()
     {
-        EventSystem.Instance.RemoveEventListener("PLAYER", PlayerListener);
+        EventSystem.Instance.RemoveEventListener(playerID, PlayerListener);
     }
 
     void Update()
@@ -160,6 +163,32 @@ public class InputHandlerAlive : MonoBehaviour
                 isAlive = false;
                 Debug.Log("Player touched lava");
             }
+        }
+    }
+
+    public void Push(Vector3 direction, float duration)
+    {
+        StartCoroutine(PushBack(direction, duration));
+    }
+
+    IEnumerator PushBack(Vector3 direction, float duration)
+    {
+        float startTime = Time.time;
+
+        while (Time.time < startTime + duration)
+        {
+            keyMove.Execute(actor, direction);
+            yield return null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Trigger")
+        {
+            Debug.Log("Trigger!");
+            //transform.TransformVector(new Vector3(0, 1.6f, 1.46f));
+            transform.position = new Vector3(0, 1.6f, 1.46f);
         }
     }
 }

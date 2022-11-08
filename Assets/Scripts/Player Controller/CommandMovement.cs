@@ -31,6 +31,14 @@ public class RotateActor : CommandMovement
     }
 }
 
+public class Shooting : CommandMovement
+{
+    public override void Execute(Actor actor, object param = null)
+    {
+        GameObject.Instantiate((GameObject)param, actor.shootingPoint.position, actor.body.transform.rotation);
+    }
+}
+
 public class Dashing : CommandMovement
 {
     public override void Execute(Actor actor, object param = null)

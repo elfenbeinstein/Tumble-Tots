@@ -18,7 +18,7 @@ public class NetworkManagerLobby : NetworkManager
 
     //Network Manager-related variables
     [SerializeField] private string menuScene = string.Empty;
-
+    
     [Header("Room")]
     [SerializeField] private NetworkRoomPlayer roomPlayerPrefab = null;
 
@@ -74,6 +74,8 @@ public class NetworkManagerLobby : NetworkManager
             NetworkRoomPlayer roomPlayerInstance = Instantiate(roomPlayerPrefab);
 
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
+            //Give player ID
+            roomPlayerInstance.playerID = $"{NetworkServer.connections.Count}";
 
             //Give player ID
             roomPlayerInstance.playerID = $"{NetworkServer.connections.Count}";
