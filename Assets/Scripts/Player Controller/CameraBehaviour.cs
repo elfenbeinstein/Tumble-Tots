@@ -10,6 +10,11 @@ public class CameraBehaviour : MonoBehaviour
 
     [SerializeField] private Vector3 camOffset;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void LateUpdate()
     {
         CamControl();
