@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class NetworkManagerLobby : NetworkManager
 {
     [SerializeField] private string menuScene = string.Empty;
-
+    
     [Header("Room")]
     [SerializeField] private NetworkRoomPlayer roomPlayerPrefab = null;
     NetworkConnectionToClient lobbyConnection;
@@ -62,6 +62,8 @@ public class NetworkManagerLobby : NetworkManager
             NetworkRoomPlayer roomPlayerInstance = Instantiate(roomPlayerPrefab);
 
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
+            //Give player ID
+            roomPlayerInstance.playerID = $"{NetworkServer.connections.Count}";
 
             roomPlayerInstance.setConnection(conn);
             roomPlayerInstance.AddLobbyCharacter();

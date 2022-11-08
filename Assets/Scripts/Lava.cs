@@ -32,9 +32,10 @@ public class Lava : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Actor>() != null)
+        if (other.gameObject.GetComponent<InputHandlerAlive>() != null)
         {
-            EventSystem.Instance.Fire("PLAYER", "TouchedLava", other.gameObject.GetComponent<Actor>());
+            string ID = other.gameObject.GetComponent<InputHandlerAlive>().playerID;
+            EventSystem.Instance.Fire(ID, "TouchedLava", other.gameObject.GetComponent<Actor>());
         }
     }
 }
