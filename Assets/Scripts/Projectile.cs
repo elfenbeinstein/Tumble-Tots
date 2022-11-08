@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.gameObject.GetComponent<InputHandlerAlive>() != null)
         {
             //Push Player back
 
