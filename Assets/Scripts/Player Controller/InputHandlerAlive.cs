@@ -38,6 +38,7 @@ public class InputHandlerAlive : MonoBehaviour
     private bool canDash;
 
     public float pushBackDuration;
+    public string playerID;
 
     void Start()
     {
@@ -50,13 +51,13 @@ public class InputHandlerAlive : MonoBehaviour
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
 
-        EventSystem.Instance.AddEventListener("PLAYER", PlayerListener);
+        EventSystem.Instance.AddEventListener(playerID, PlayerListener);
         Cursor.visible = false;
     }
 
     private void OnDestroy()
     {
-        EventSystem.Instance.RemoveEventListener("PLAYER", PlayerListener);
+        EventSystem.Instance.RemoveEventListener(playerID, PlayerListener);
     }
 
     void Update()
