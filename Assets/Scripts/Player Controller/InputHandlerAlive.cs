@@ -181,4 +181,14 @@ public class InputHandlerAlive : MonoBehaviour
             yield return null;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Trigger")
+        {
+            Debug.Log("Trigger!");
+            //transform.TransformVector(new Vector3(0, 1.6f, 1.46f));
+            transform.position = new Vector3(0, 1.6f, 1.46f);
+        }
+    }
 }
