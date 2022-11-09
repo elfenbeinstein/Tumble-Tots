@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAudio : MonoBehaviour
 {
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
 
     [SerializeField] private AudioClip jump;
     [SerializeField] [Range(0, 1 )] private float jumpVolume;
@@ -40,11 +40,11 @@ public class PlayerAudio : MonoBehaviour
     private void AudioListener(string eventName, object param)
     {
         if (eventName == "jump") PlayJump();
-        if (eventName == "dash") PlayDash();
-        if (eventName == "shoot") PlayShoot();
-        if (eventName == "death") PlayDeath();
-        if (eventName == "start") PlayStart();
-        if (eventName == "goal") PlayGoal();
+        else if (eventName == "dash") PlayDash();
+        else if (eventName == "shoot") PlayShoot();
+        else if (eventName == "death") PlayDeath();
+        else if (eventName == "start") PlayStart();
+        else if (eventName == "goal") PlayGoal();
     }
 
     [ContextMenu("jump")]
