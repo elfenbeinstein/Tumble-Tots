@@ -51,6 +51,7 @@ public class InputHandlerAlive : NetworkBehaviour
         {
             cam = Instantiate(camToSpawn, camPivot.position, camPivot.rotation);
             cam.transform.parent = camPivot.transform;
+            FindObjectOfType<CameraBehaviour>().player = gameObject;
         }
 
         isAlive = true;
