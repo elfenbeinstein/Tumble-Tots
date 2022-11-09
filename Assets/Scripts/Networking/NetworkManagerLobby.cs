@@ -12,6 +12,8 @@ public class NetworkManagerLobby : NetworkManager
     [SerializeField] GameObject[] spawnPoints = new GameObject[8];
     [SerializeField] List<GameObject> registeredObjects;
     [SerializeField] int roundNumber;
+    [SerializeField] int finishedPlayers;
+    [SerializeField] int Qualifiers;
 
 
     //Network Manager
@@ -79,8 +81,9 @@ public class NetworkManagerLobby : NetworkManager
             NetworkRoomPlayer roomPlayerInstance = Instantiate(roomPlayerPrefab);
 
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
+
             //Give player ID & add to list
-            roomPlayerInstance.playerID = $"{NetworkServer.connections.Count}";
+            roomPlayerInstance.playerID = $"{NetworkServer.connections.Count - 1}";
             players.Add(roomPlayerInstance);
 
             roomPlayerInstance.setConnection(conn);
@@ -115,6 +118,20 @@ public class NetworkManagerLobby : NetworkManager
     {
         roundNumber++;
 
+        switch (roundNumber)
+        {
+            case 1:
+                Qualifiers = 5;
+                break;
+            case 2:
+                Qualifiers = 3;
+                break;
+            case 3:
+                Qualifiers = 1;
+                break;
+
+        }
+
         spawnPrefabs.Clear();
         foreach(GameObject rObject in registeredObjects)
         {
@@ -130,13 +147,57 @@ public class NetworkManagerLobby : NetworkManager
     void SpawnPlayers()
     {
         int i = 0;
+
         foreach(NetworkRoomPlayer player in players)
         {
-            GameObject newPlayer = Instantiate(player.playerTypes[1], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
-            NetworkServer.Spawn(newPlayer);
-            player.currentPlayerPrefab = newPlayer;
-            NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
+            GameObject newPlayer = null;
+            if (player.isDead) //Dead players
+            {
+                newPlayer = Instantiate(player.playerTypes[3], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
+                NetworkServer.Spawn(newPlayer);
+                player.currentPlayerPrefab = newPlayer;
+                NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
+            }
+            else //Type of tot
+            {
+                if(SceneManager.GetActiveScene().name == "Race_Obstacles")
+                {
+                    newPlayer = Instantiate(player.playerTypes[2], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
+                }
+                else
+                {
+                    newPlayer = Instantiate(player.playerTypes[1], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
+                }
+                NetworkServer.Spawn(newPlayer);
+                player.currentPlayerPrefab = newPlayer;
+                newPlayer.GetComponent<InputHandlerAlive>().playerID = player.playerID;
+                newPlayer.GetComponent<InputHandlerAlive>().owner = player;
+                NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
+            }
             i++;
+        }
+    }
+
+    public void PlayerDone(NetworkRoomPlayer player)
+    {
+        player.RemoveAllChildren(); //Destroy object
+
+        //Spawn spectator ghost
+        GameObject spectator = Instantiate(player.playerTypes[3], spawnPoints[1].transform.position, spawnPoints[1].transform.rotation);
+        NetworkServer.Spawn(spectator);
+        player.currentPlayerPrefab = spectator;
+        NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
+
+        finishedPlayers++; //Qualification Logic
+        if(finishedPlayers >= Qualifiers)
+        {
+            GameObject[] badPlayers = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach(GameObject badPlayer in badPlayers)
+            {
+                badPlayer.GetComponent<InputHandlerAlive>().owner.isDead = true;
+                badPlayer.GetComponent<InputHandlerAlive>().owner.RemoveAllChildren();
+            }
         }
     }
 }

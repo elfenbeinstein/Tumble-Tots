@@ -11,5 +11,5 @@ public class Actor : MonoBehaviour
     private void Awake()
     {
         cc = gameObject.GetComponent<CharacterController>();
-    }
+    }   
 }

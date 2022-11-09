@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class InputHandlerDead : MonoBehaviour
+public class InputHandlerDead : NetworkBehaviour
 {
     [SerializeField] private Transform cam;
     [SerializeField] private Actor actor;
@@ -41,43 +42,49 @@ public class InputHandlerDead : MonoBehaviour
 
     private void PlayerMovement()
     {
-        moveX = Input.GetAxis("Horizontal");
-        moveZ = Input.GetAxis("Vertical");
-        movementVector = new Vector3(moveX, 0f, moveZ);
-
-        if (Input.GetKey(KeyCode.E)) flyDirection = 1;
-        else if (Input.GetKey(KeyCode.Q)) flyDirection = -1;
-        else flyDirection = 0;
-
-        //if (movementVector.magnitude > 1) movementVector = movementVector.normalized; 
-
-        if (movementVector.magnitude >= 0.1f)
+        if (isLocalPlayer)
         {
-            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            keyRotate.Execute(actor, targetAngle);
+            moveX = Input.GetAxis("Horizontal");
+            moveZ = Input.GetAxis("Vertical");
+            movementVector = new Vector3(moveX, 0f, moveZ);
 
-            movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;;
+            if (Input.GetKey(KeyCode.E)) flyDirection = 1;
+            else if (Input.GetKey(KeyCode.Q)) flyDirection = -1;
+            else flyDirection = 0;
 
-            keyMove.Execute(actor, movementVector * movementSpeed * Time.deltaTime);
-            //keyMove.Execute(actor, Vector3.right * moveX * movementSpeed * Time.deltaTime);
-            //keyMove.Execute(actor, Vector3.forward * moveZ * movementSpeed * Time.deltaTime);
-        }
-        
-        if (flyDirection != 0)
-        {
-            keyMove.Execute(actor, Vector3.up * flyDirection * movementSpeed * Time.deltaTime);
+            //if (movementVector.magnitude > 1) movementVector = movementVector.normalized; 
+
+            if (movementVector.magnitude >= 0.1f)
+            {
+                targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                keyRotate.Execute(actor, targetAngle);
+
+                movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized; ;
+
+                keyMove.Execute(actor, movementVector * movementSpeed * Time.deltaTime);
+                //keyMove.Execute(actor, Vector3.right * moveX * movementSpeed * Time.deltaTime);
+                //keyMove.Execute(actor, Vector3.forward * moveZ * movementSpeed * Time.deltaTime);
+            }
+
+            if (flyDirection != 0)
+            {
+                keyMove.Execute(actor, Vector3.up * flyDirection * movementSpeed * Time.deltaTime);
+            }
         }
     }
 
     public void Shooting()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canShoot == true)
+        if (isLocalPlayer)
         {
-            EventSystem.Instance.Fire("AUDIO", "shoot");
-            keyShoot.Execute(actor, projectile);
-            canShoot = false;
-            StartCoroutine(Cooldown());
+            if (Input.GetKeyDown(KeyCode.Space) && canShoot == true)
+            {
+                EventSystem.Instance.Fire("AUDIO", "shoot");
+                keyShoot.Execute(actor, projectile);
+                canShoot = false;
+                StartCoroutine(Cooldown());
+            }
         }
     }
 

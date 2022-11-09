@@ -11,6 +11,7 @@ public class InputHandlerAlive : NetworkBehaviour
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
+    public NetworkRoomPlayer owner;
 
     bool isAlive;
     CommandMovement keyMove, keyRotate;

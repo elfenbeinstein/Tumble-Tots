@@ -205,9 +205,10 @@ GameObject:
   - component: {fileID: 479745952703944571}
   - component: {fileID: 7394044721462385705}
   - component: {fileID: -91307996145658439}
+  - component: {fileID: -3369531194748675933}
   m_Layer: 0
   m_Name: Tot_With_Jordans
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,10 +275,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d972e658573324b8a31b18e746de28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 2083371636736283118}
+  syncMode: 0
+  syncInterval: 0.1
+  body: {fileID: 1476738647576079529}
+  cam: {fileID: 7786530273340067764}
   actor: {fileID: 479745952703944571}
   movementSpeed: 6
   turnSmoothTime: 0.1
+  owner: {fileID: 0}
   sprintMultiplier: 2.01
   playerFeet: {fileID: 479745951021444656}
   isGrounded: 0
@@ -307,6 +312,43 @@ MonoBehaviour:
   visible: 0
   m_AssetId: bba3d86447410c246892e60ae2503d46
   hasSpawned: 0
+--- !u!114 &-3369531194748675933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479745952703944561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  sendRate: 30
+  bufferTimeMultiplier: 2
+  bufferSizeLimit: 64
+  catchupNegativeThreshold: -1
+  catchupPositiveThreshold: 1
+  catchupSpeed: 0.009999999776482582
+  slowdownSpeed: 0.009999999776482582
+  driftEmaDuration: 1
+  dynamicAdjustment: 1
+  dynamicAdjustmentTolerance: 1
+  deliveryTimeEmaDuration: 2
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!1 &651197991034087670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1056,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7396094669009380391}
-  m_LocalRotation: {x: 0.26803216, y: -0.6078299, z: 0.22896852, w: 0.71153}
+  m_LocalRotation: {x: 0.2680322, y: -0.60782987, z: 0.22896847, w: 0.7115301}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
