@@ -6385,6 +6385,8 @@ MonoBehaviour:
   goalVolume: 0.79
   start: {fileID: 8300000, guid: e949677b59e3f81489f0777fc613d5d6, type: 3}
   startVolume: 0.71
+  ouch: {fileID: 8300000, guid: cdd7a905cfc143c4ab97a87abbf01027, type: 3}
+  ouchVolume: 0.574
 --- !u!1 &1507715857
 GameObject:
   m_ObjectHideFlags: 0
@@ -9098,11 +9100,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885982121943823100, guid: 7277ae9c03094b344aaad43768fb9b30, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.047318403
+      value: -0.047318473
       objectReference: {fileID: 0}
     - target: {fileID: 4885982121943823100, guid: 7277ae9c03094b344aaad43768fb9b30, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.017824763
+      value: -0.017824788
       objectReference: {fileID: 0}
     - target: {fileID: 4885982121943823100, guid: 7277ae9c03094b344aaad43768fb9b30, type: 3}
       propertyPath: m_LocalRotation.y

@@ -75,17 +75,14 @@ public class InputHandlerAlive : NetworkBehaviour
 
     private void HandleInput()
     {
-        /* -- obsolete no Sprinting, instead we dash
-        // Sprint:
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-            isSprinting = true;
-        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
-            isSprinting = false;
-        */
         if (isLocalPlayer)
         {
             if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-                if (canDash) StartCoroutine(Dashing());
+                if (canDash) 
+                { 
+                    StartCoroutine(Dashing());
+                    EventSystem.Instance.Fire("AUDIO", "dash");
+                }
 
             PlayerMovement();
 
@@ -131,6 +128,7 @@ public class InputHandlerAlive : NetworkBehaviour
         if (isGrounded)
         {
             verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            EventSystem.Instance.Fire("AUDIO", "jump");
             canDoubleJump = true;
         }
         else
@@ -138,6 +136,7 @@ public class InputHandlerAlive : NetworkBehaviour
             if (canDoubleJump)
             {
                 verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                EventSystem.Instance.Fire("AUDIO", "jump");
                 canDoubleJump = false;
             }
         }

@@ -24,6 +24,9 @@ public class PlayerAudio : MonoBehaviour
     [SerializeField] private AudioClip start;
     [SerializeField] [Range(0, 1)] private float startVolume;
 
+    [SerializeField] private AudioClip ouch;
+    [SerializeField] [Range(0, 1)] private float ouchVolume;
+
 
     void Start()
     {
@@ -45,6 +48,7 @@ public class PlayerAudio : MonoBehaviour
         else if (eventName == "death") PlayDeath();
         else if (eventName == "start") PlayStart();
         else if (eventName == "goal") PlayGoal();
+        else if (eventName == "ouch") PlayOuch();
     }
 
     [ContextMenu("jump")]
@@ -81,5 +85,11 @@ public class PlayerAudio : MonoBehaviour
     private void PlayStart()
     {
         audioSource.PlayOneShot(start, startVolume);
+    }
+
+    [ContextMenu("ouch")]
+    private void PlayOuch()
+    {
+        audioSource.PlayOneShot(ouch, ouchVolume);
     }
 }

@@ -98,4 +98,25 @@ public class AudioManager : MonoBehaviour
         }
         yield break;
     }
+    
 }
+
+/* -- add to UI
+private Slider sliderSFX;
+private Slider sliderMusic;
+
+in start function -->
+sliderSFX.value = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
+sliderMusic.value = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
+
+public void SetLevelSFX(float value)
+{
+    PlayerPrefs.SetFloat("SFXVolume", value);
+    EventSystem.Instance.Fire("AUDIO", "SFX", value);
+}
+public void SetLevelMusic(float value)
+{
+    PlayerPrefs.SetFloat("MusicVolume", value);
+    EventSystem.Instance.Fire("AUDIO", "Music", value);
+}
+*/

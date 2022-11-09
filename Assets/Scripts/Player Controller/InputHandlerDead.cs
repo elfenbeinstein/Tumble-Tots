@@ -74,6 +74,7 @@ public class InputHandlerDead : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && canShoot == true)
         {
+            EventSystem.Instance.Fire("AUDIO", "shoot");
             keyShoot.Execute(actor, projectile);
             canShoot = false;
             StartCoroutine(Cooldown());
