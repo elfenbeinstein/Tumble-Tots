@@ -5,9 +5,9 @@ using Mirror;
 
 public class InputHandlerAlive : NetworkBehaviour
 {
+    [SerializeField] private Transform body;
     [SerializeField] private GameObject cam;
-    [SerializeField] private GameObject camToSpawn;
-    [SerializeField] private Transform camPivot;
+
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -47,10 +47,9 @@ public class InputHandlerAlive : NetworkBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
 
-        if (isLocalPlayer)
+        if (!isLocalPlayer)
         {
-            cam = Instantiate(camToSpawn, camPivot.position, camPivot.rotation);
-            cam.transform.parent = camPivot.transform;
+            Destroy(cam);
         }
 
         isAlive = true;
