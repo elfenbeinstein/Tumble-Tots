@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+// when you go back to the lobby:
+//EventSystem.Instance.Fire("AUDIO", "lobby");
+
 public class NetworkManagerLobby : NetworkManager
 {
     //Game Manager
@@ -35,6 +39,7 @@ public class NetworkManagerLobby : NetworkManager
         {
             registeredObjects.Add(rObject);
         }
+        EventSystem.Instance.Fire("AUDIO", "lobby");
     }
 
     public override void OnStartClient()
@@ -122,6 +127,7 @@ public class NetworkManagerLobby : NetworkManager
     private void OnLevelWasLoaded(int level)
     {
         Initialize();
+        EventSystem.Instance.Fire("AUDIO", "level");
     }
 
     void Initialize() //Get spawnpoints, update round counter
