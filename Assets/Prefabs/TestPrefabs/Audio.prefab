@@ -422,7 +422,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5338344995624349258}
   - component: {fileID: 5338344995624349259}
-  - component: {fileID: 5338344995624349256}
   m_Layer: 0
   m_Name: Audio
   m_TagString: AudioManager
@@ -467,11 +466,3 @@ MonoBehaviour:
   durationFadeOut: 2
   volumeLevel: 0.6
   volumeLobby: 0.4
---- !u!81 &5338344995624349256
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5338344995624349301}
-  m_Enabled: 1

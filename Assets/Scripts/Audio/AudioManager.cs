@@ -21,6 +21,8 @@ public class AudioManager : MonoBehaviour
         GameObject[] objs = GameObject.FindGameObjectsWithTag("AudioManager");
         if (objs.Length > 1) Destroy(this.gameObject);
         DontDestroyOnLoad(this.gameObject);
+        EventSystem.Instance.Fire("AUDIO", "music", PlayerPrefs.GetFloat("MusicVolume", 0.75f));
+        EventSystem.Instance.Fire("AUDIO", "sfx", PlayerPrefs.GetFloat("SFXVolume", 0.75f));
     }
     private void OnDestroy()
     {

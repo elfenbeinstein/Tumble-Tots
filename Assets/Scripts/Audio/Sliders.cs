@@ -17,11 +17,11 @@ public class Sliders : MonoBehaviour
     public void SetLevelSFX(float value)
     {
         PlayerPrefs.SetFloat("SFXVolume", value);
-        EventSystem.Instance.Fire("AUDIO", "SFX", value);
+        EventSystem.Instance.Fire("AUDIO", "sfx", value);
     }
     public void SetLevelMusic(float value)
     {
         PlayerPrefs.SetFloat("MusicVolume", value);
-        EventSystem.Instance.Fire("AUDIO", "Music", value);
+        EventSystem.Instance.Fire("AUDIO", "music", value);
     }
 }
