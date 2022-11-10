@@ -394,6 +394,8 @@ MonoBehaviour:
   spawnPoints: []
   registeredObjects: []
   roundNumber: 0
+  finishedPlayers: 0
+  Qualifiers: 0
   menuScene: Assets/Scenes/Lobby.unity
   roomPlayerPrefab: {fileID: 392018158791181946, guid: 3ff6e9306704c5e43b9a85feadb88a61, type: 3}
 --- !u!114 &348197748
@@ -506,7 +508,7 @@ MonoBehaviour:
       - m_Target: {fileID: 348197747}
         m_TargetAssemblyTypeName: NetworkManagerLobby, Assembly-CSharp
         m_MethodName: LoadLevel
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

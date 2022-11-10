@@ -5,7 +5,7 @@ using Mirror;
 
 public class InputHandlerDead : NetworkBehaviour
 {
-    [SerializeField] private Transform cam;
+    [SerializeField] private GameObject cam;
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -25,6 +25,11 @@ public class InputHandlerDead : NetworkBehaviour
 
     void Start()
     {
+        if (isLocalPlayer)
+        {
+            cam.SetActive(true);
+        }
+
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
         keyShoot = new Shooting();
@@ -56,7 +61,7 @@ public class InputHandlerDead : NetworkBehaviour
 
             if (movementVector.magnitude >= 0.1f)
             {
-                targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
                 angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                 keyRotate.Execute(actor, targetAngle);
 

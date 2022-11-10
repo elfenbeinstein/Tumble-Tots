@@ -94,14 +94,24 @@ public class NetworkManagerLobby : NetworkManager
         }
     }
 
-    public void LoadLevel(string levelName)
+    public void LoadLevel()
     {
+        switch (roundNumber)
+        {
+            case 0:
+                ServerChangeScene("Race_Obstacles");
+                break;
+            case 1:
+                ServerChangeScene("Julian_test");
+                break;
+            case 2:
+                ServerChangeScene("Tabea_test");
+                break;
+        }
         foreach (KeyValuePair<int, NetworkConnectionToClient> player in NetworkServer.connections)
         {
             player.Value.identity.GetComponentInParent<NetworkRoomPlayer>().RemoveAllChildren();
         }
-
-        ServerChangeScene(levelName);
     }
 
 
@@ -121,10 +131,10 @@ public class NetworkManagerLobby : NetworkManager
         switch (roundNumber)
         {
             case 1:
-                Qualifiers = 5;
+                Qualifiers = 2;
                 break;
             case 2:
-                Qualifiers = 3;
+                Qualifiers = 1;
                 break;
             case 3:
                 Qualifiers = 1;
@@ -198,6 +208,31 @@ public class NetworkManagerLobby : NetworkManager
                 badPlayer.GetComponent<InputHandlerAlive>().owner.isDead = true;
                 badPlayer.GetComponent<InputHandlerAlive>().owner.RemoveAllChildren();
             }
+            LoadLevel();
         }
     }
+
+    public void KillPlayer(NetworkRoomPlayer player)
+    {
+        GameObject ghost = Instantiate(player.playerTypes[3], spawnPoints[1].transform.position, spawnPoints[1].transform.rotation);
+        NetworkServer.Spawn(ghost);
+        player.currentPlayerPrefab = ghost;
+        player.isDead = true; //Set player data to dead
+        NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
+
+        finishedPlayers++;
+        if (finishedPlayers >= Qualifiers)
+        {
+            GameObject[] badPlayers = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach (GameObject badPlayer in badPlayers)
+            {
+                badPlayer.GetComponent<InputHandlerAlive>().owner.isDead = true;
+                badPlayer.GetComponent<InputHandlerAlive>().owner.RemoveAllChildren();
+            }
+            LoadLevel();
+        }
+    }
+
+
 }
