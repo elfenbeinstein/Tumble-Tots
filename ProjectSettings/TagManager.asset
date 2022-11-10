@@ -10,6 +10,8 @@ TagManager:
   - SpawnP
   - AudioManager
   - End
+  - Trigger
+  - DefaultSpawn
   layers:
   - Default
   - TransparentFX

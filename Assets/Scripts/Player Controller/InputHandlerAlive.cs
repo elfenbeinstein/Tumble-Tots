@@ -44,6 +44,8 @@ public class InputHandlerAlive : NetworkBehaviour
     public float pushBackDuration;
     public string playerID;
 
+    public Vector3 defaultSpawn;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -198,7 +200,7 @@ public class InputHandlerAlive : NetworkBehaviour
         {
             Debug.Log("Trigger!");
             //transform.TransformVector(new Vector3(0, 1.6f, 1.46f));
-            transform.position = new Vector3(0, 1.6f, 1.46f);
+            transform.position = GameObject.FindGameObjectWithTag("DefaultSpawn").transform.position;
         }
     }
 }
