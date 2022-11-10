@@ -7,8 +7,6 @@ public class Projectile : MonoBehaviour
     public float speed, duration, force, pushDuration;
     private CommandMovement movePlayer;
     public Actor actor;
-    bool push;
-    float timePassed;
 
     private void Start()
     {

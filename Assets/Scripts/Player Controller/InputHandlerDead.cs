@@ -57,8 +57,6 @@ public class InputHandlerDead : NetworkBehaviour
             else if (Input.GetKey(KeyCode.Q)) flyDirection = -1;
             else flyDirection = 0;
 
-            //if (movementVector.magnitude > 1) movementVector = movementVector.normalized; 
-
             if (movementVector.magnitude >= 0.1f)
             {
                 targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
@@ -68,8 +66,6 @@ public class InputHandlerDead : NetworkBehaviour
                 movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized; ;
 
                 keyMove.Execute(actor, movementVector * movementSpeed * Time.deltaTime);
-                //keyMove.Execute(actor, Vector3.right * moveX * movementSpeed * Time.deltaTime);
-                //keyMove.Execute(actor, Vector3.forward * moveZ * movementSpeed * Time.deltaTime);
             }
 
             if (flyDirection != 0)
