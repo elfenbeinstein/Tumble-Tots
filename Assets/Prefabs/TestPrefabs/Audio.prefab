@@ -314,8 +314,8 @@ MonoBehaviour:
   goalVolume: 0.79
   start: {fileID: 8300000, guid: e949677b59e3f81489f0777fc613d5d6, type: 3}
   startVolume: 0.71
-  ouch: {fileID: 8300000, guid: cdd7a905cfc143c4ab97a87abbf01027, type: 3}
-  ouchVolume: 0.399
+  ouch: {fileID: 8300000, guid: 2fc257a79c968f84b895dba2ac0cb9cd, type: 3}
+  ouchVolume: 0.55
 --- !u!82 &5338344995217552341
 AudioSource:
   m_ObjectHideFlags: 0
