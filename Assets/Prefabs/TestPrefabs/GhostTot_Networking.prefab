@@ -1095,9 +1095,9 @@ MonoBehaviour:
   syncInterval: 0.1
   cam: {fileID: 8843714512252113824}
   actor: {fileID: 7992412510714384205}
-  movementSpeed: 6
+  movementSpeed: 8
   turnSmoothTime: 0.1
-  cooldown: 2.5
+  cooldown: 0.3
   projectile: {fileID: 7320670370091379534, guid: 186daa3c4bdfa5e43ae07f615c047dcf, type: 3}
 --- !u!1 &8843714512252113824
 GameObject:

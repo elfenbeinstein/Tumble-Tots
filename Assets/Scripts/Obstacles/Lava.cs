@@ -36,6 +36,7 @@ public class Lava : MonoBehaviour
         {
             string ID = other.gameObject.GetComponent<InputHandlerAlive>().playerID;
             EventSystem.Instance.Fire(ID, "TouchedLava", other.gameObject.GetComponent<Actor>());
+            EventSystem.Instance.Fire("AUDIO", "death");
         }
     }
 }

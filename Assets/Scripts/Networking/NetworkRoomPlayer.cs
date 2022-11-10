@@ -35,4 +35,9 @@ public class NetworkRoomPlayer : NetworkBehaviour
 
         NetworkServer.ReplacePlayerForConnection(conn, currentPlayerPrefab); //Re-route current connection to lobby player gameobject
     }
+
+    public void AudioCommands(string eventName, string eventID)
+    {
+        EventSystem.Instance.Fire(eventName, eventID);
+    }
 }

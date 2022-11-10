@@ -204,6 +204,7 @@ public class NetworkManagerLobby : NetworkManager
         player.currentPlayerPrefab = spectator;
         NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
 
+        /*
         finishedPlayers++; //Qualification Logic
         if(finishedPlayers >= Qualifiers)
         {
@@ -216,6 +217,7 @@ public class NetworkManagerLobby : NetworkManager
             }
             LoadLevel();
         }
+        */
     }
 
     public void KillPlayer(NetworkRoomPlayer player)

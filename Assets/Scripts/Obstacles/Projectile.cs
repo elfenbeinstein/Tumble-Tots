@@ -30,6 +30,8 @@ public class Projectile : MonoBehaviour
             pushDirection.Normalize();
 
             collision.gameObject.GetComponent<InputHandlerAlive>().Push(pushDirection * force * Time.deltaTime, pushDuration);
+
+            EventSystem.Instance.Fire("AUDIO", "ouch");
         }
         
         if (collision.gameObject.GetComponent<InputHandlerDead>() == null)

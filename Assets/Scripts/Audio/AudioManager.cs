@@ -100,4 +100,10 @@ public class AudioManager : MonoBehaviour
         }
         yield break;
     }
+
+    [ContextMenu("remove player prefs")]
+    private void RemovePlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
