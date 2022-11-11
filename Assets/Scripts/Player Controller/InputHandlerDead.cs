@@ -77,16 +77,21 @@ public class InputHandlerDead : NetworkBehaviour
 
     public void Shooting()
     {
-        if (isLocalPlayer)
+        if (Input.GetKeyDown(KeyCode.Space) && canShoot == true && isLocalPlayer)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && canShoot == true)
-            {
-                EventSystem.Instance.Fire("AUDIO", "shoot");
-                keyShoot.Execute(actor, projectile);
-                canShoot = false;
-                StartCoroutine(Cooldown());
-            }
+            Shoot();
+            EventSystem.Instance.Fire("AUDIO", "shoot");
+            canShoot = false;
+            StartCoroutine(Cooldown());
         }
+    }
+
+    [Command]
+    void Shoot()
+    {
+        Debug.Log("Called;");
+        GameObject bullet = GameObject.Instantiate(projectile, actor.shootingPoint.transform.position, actor.shootingPoint.transform.rotation); //Create bullet
+        NetworkServer.Spawn(bullet);
     }
 
     IEnumerator Cooldown()

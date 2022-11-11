@@ -2,6 +2,7 @@ using Mirror;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -101,23 +102,28 @@ public class NetworkManagerLobby : NetworkManager
 
     public void LoadLevel()
     {
+        foreach (NetworkRoomPlayer player in players)
+        {
+            player.RemoveAllChildren();
+        }
+
+        roundNumber++;
+
         switch (roundNumber)
         {
-            case 0:
+            case 1:
                 ServerChangeScene("Race_Obstacles");
                 break;
-            case 1:
+            case 2:
                 ServerChangeScene("Julian_test");
                 break;
-            case 2:
+            case 3:
                 ServerChangeScene("Tabea_test");
                 break;
         }
-        foreach (KeyValuePair<int, NetworkConnectionToClient> player in NetworkServer.connections)
-        {
-            player.Value.identity.GetComponentInParent<NetworkRoomPlayer>().RemoveAllChildren();
-        }
     }
+
+
 
 
 
@@ -127,20 +133,19 @@ public class NetworkManagerLobby : NetworkManager
     private void OnLevelWasLoaded(int level)
     {
         Initialize();
+        finishedPlayers = 0;
         EventSystem.Instance.Fire("AUDIO", "level");
     }
 
     void Initialize() //Get spawnpoints, update round counter
     {
-        roundNumber++;
-
         switch (roundNumber)
         {
             case 1:
                 Qualifiers = 2;
                 break;
             case 2:
-                Qualifiers = 1;
+                Qualifiers = 2;
                 break;
             case 3:
                 Qualifiers = 1;
@@ -196,28 +201,22 @@ public class NetworkManagerLobby : NetworkManager
 
     public void PlayerDone(NetworkRoomPlayer player)
     {
-        player.RemoveAllChildren(); //Destroy object
-
-        //Spawn spectator ghost
-        GameObject spectator = Instantiate(player.playerTypes[3], spawnPoints[1].transform.position, spawnPoints[1].transform.rotation);
-        NetworkServer.Spawn(spectator);
-        player.currentPlayerPrefab = spectator;
-        NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
-
-        /*
         finishedPlayers++; //Qualification Logic
-        if(finishedPlayers >= Qualifiers)
+        if (finishedPlayers >= Qualifiers)
         {
-            GameObject[] badPlayers = GameObject.FindGameObjectsWithTag("Player");
-
-            foreach(GameObject badPlayer in badPlayers)
-            {
-                badPlayer.GetComponent<InputHandlerAlive>().owner.isDead = true;
-                badPlayer.GetComponent<InputHandlerAlive>().owner.RemoveAllChildren();
-            }
-            LoadLevel();
+            RoundEnd(player.currentPlayerPrefab);
         }
-        */
+        else
+        {
+            NetworkServer.ReplacePlayerForConnection(player.conn, player.gameObject); //Give connection back to data object
+            player.RemoveAllChildren(); //Destroy previous player object
+
+            //Spawn spectator ghost
+            GameObject spectator = Instantiate(player.playerTypes[3], spawnPoints[1].transform.position, spawnPoints[1].transform.rotation);
+            NetworkServer.Spawn(spectator);
+            player.currentPlayerPrefab = spectator;
+            NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
+        }
     }
 
     public void KillPlayer(NetworkRoomPlayer player)
@@ -231,16 +230,26 @@ public class NetworkManagerLobby : NetworkManager
         finishedPlayers++;
         if (finishedPlayers >= Qualifiers)
         {
-            GameObject[] badPlayers = GameObject.FindGameObjectsWithTag("Player");
-
-            foreach (GameObject badPlayer in badPlayers)
-            {
-                badPlayer.GetComponent<InputHandlerAlive>().owner.isDead = true;
-                badPlayer.GetComponent<InputHandlerAlive>().owner.RemoveAllChildren();
-            }
-            LoadLevel();
+            RoundEnd(this.gameObject);
         }
     }
 
+    public void RoundEnd(GameObject protectedObject)
+    {
+        //Get all alive players & kill them
+        GameObject[] alivePlayers = GameObject.FindGameObjectsWithTag("Player");
 
+        foreach(GameObject player in alivePlayers)
+        {
+            if (player != protectedObject)
+            {
+                NetworkRoomPlayer playerData = player.GetComponent<InputHandlerAlive>().owner;
+                NetworkServer.ReplacePlayerForConnection(playerData.conn, playerData.gameObject); //Give connection back to player data
+                playerData.RemoveAllChildren();
+                playerData.isDead = true;
+            }
+        }
+
+        LoadLevel(); //Load next level
+    }
 }

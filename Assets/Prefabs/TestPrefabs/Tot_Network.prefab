@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16615576322039685}
-  m_LocalRotation: {x: 0.33543634, y: 0.000000032418992, z: -0.000000011543292, w: 0.9420629}
+  m_LocalRotation: {x: 0.33543634, y: -0.000000032418992, z: 0.000000011543292, w: 0.9420629}
   m_LocalPosition: {x: 0, y: 9.93, z: -11.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -603,6 +603,7 @@ GameObject:
   - component: {fileID: 9130483404868530434}
   - component: {fileID: -3456592279316854768}
   - component: {fileID: -8742378489645326161}
+  - component: {fileID: 3294435104781498311}
   m_Layer: 0
   m_Name: Tot_Network
   m_TagString: Player
@@ -679,6 +680,7 @@ MonoBehaviour:
   actor: {fileID: 2198165985575189072}
   movementSpeed: 6
   turnSmoothTime: 0.1
+  owner: {fileID: 0}
   sprintMultiplier: 2.01
   playerFeet: {fileID: 2198165984974930715}
   isGrounded: 0
@@ -691,6 +693,7 @@ MonoBehaviour:
   dashCooldown: 1
   pushBackDuration: 0
   playerID: 
+  defaultSpawn: {x: 0, y: 0, z: 0}
 --- !u!114 &-3456592279316854768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +748,44 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &3294435104781498311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2198165985575189082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  sendRate: 30
+  bufferTimeMultiplier: 2
+  bufferSizeLimit: 64
+  catchupNegativeThreshold: -1
+  catchupPositiveThreshold: 1
+  catchupSpeed: 0.009999999776482582
+  slowdownSpeed: 0.009999999776482582
+  driftEmaDuration: 1
+  dynamicAdjustment: 1
+  dynamicAdjustmentTolerance: 1
+  deliveryTimeEmaDuration: 2
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 0
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  target: {fileID: 889319975780303234}
 --- !u!1 &2678144551377696747
 GameObject:
   m_ObjectHideFlags: 3
@@ -769,7 +810,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2678144551377696747}
-  m_LocalRotation: {x: 0.33543628, y: 0.000000016209494, z: -0.0000000057716445, w: 0.9420629}
+  m_LocalRotation: {x: 0.33543628, y: -0.000000016209496, z: 0.000000005771645, w: 0.9420629}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

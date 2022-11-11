@@ -7,7 +7,7 @@ public class NetworkRoomPlayer : NetworkBehaviour
     public GameObject[] playerTypes; //Different player prefabs
     public GameObject currentPlayerPrefab; //Current player prefab attatched
     public string playerID;
-    public bool isDead;
+    public bool isDead = false;
 
     public NetworkConnectionToClient conn;
 

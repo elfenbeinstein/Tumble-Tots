@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public abstract class CommandMovement
 {
@@ -35,9 +36,11 @@ public class Shooting : CommandMovement
 {
     public override void Execute(Actor actor, object param = null)
     {
-        GameObject.Instantiate((GameObject)param, actor.shootingPoint.position, actor.body.transform.rotation);
+
     }
 }
+
+
 
 public class Dashing : CommandMovement
 {
