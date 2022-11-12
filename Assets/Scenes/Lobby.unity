@@ -399,6 +399,7 @@ MonoBehaviour:
   finishedPlayers: 0
   Qualifiers: 0
   menuScene: Assets/Scenes/Lobby.unity
+  readyPlayers: 0
   roomPlayerPrefab: {fileID: 392018158791181946, guid: 3ff6e9306704c5e43b9a85feadb88a61, type: 3}
 --- !u!114 &348197748
 MonoBehaviour:

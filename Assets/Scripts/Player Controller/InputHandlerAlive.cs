@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using Mirror;
 
@@ -69,7 +68,8 @@ public class InputHandlerAlive : NetworkBehaviour
         EventSystem.Instance.AddEventListener(playerID, PlayerListener);
         Cursor.visible = false;
 
-        //playerName.gameObject.GetComponent<TextMeshProUGUI>().text = owner.playerName;
+        playerName.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
+        //playerName.GetComponent<TextMeshProUGUI>().text = owner.playerName;
     }
 
     private void OnDestroy()

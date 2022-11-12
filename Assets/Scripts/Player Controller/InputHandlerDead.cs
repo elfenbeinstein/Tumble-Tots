@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using TMPro;
 
 public class InputHandlerDead : NetworkBehaviour
 {
@@ -23,6 +24,8 @@ public class InputHandlerDead : NetworkBehaviour
 
     public GameObject projectile;
 
+    public TMP_Text playerName;
+
     void Start()
     {
         if (isLocalPlayer)
@@ -37,6 +40,8 @@ public class InputHandlerDead : NetworkBehaviour
         Cursor.visible = false;
 
         canShoot = true;
+
+        playerName.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
     }
 
     void Update()
