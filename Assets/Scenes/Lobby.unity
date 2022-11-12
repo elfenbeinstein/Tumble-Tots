@@ -394,6 +394,7 @@ MonoBehaviour:
   players: []
   spawnPoints: []
   registeredObjects: []
+  lobbySize: 0
   roundNumber: 0
   finishedPlayers: 0
   Qualifiers: 0

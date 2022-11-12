@@ -32,8 +32,8 @@ public class NetworkRoomPlayer : NetworkBehaviour
     {
         currentPlayerPrefab = Instantiate(playerTypes[0], this.transform.position, this.transform.rotation);
         currentPlayerPrefab.transform.parent = gameObject.transform; //Spawn and child player gameobject
-
         NetworkServer.ReplacePlayerForConnection(conn, currentPlayerPrefab); //Re-route current connection to lobby player gameobject
+        currentPlayerPrefab.GetComponent<ChatBehaviourScript>().conn = conn;
     }
 
     public void AudioCommands(string eventName, string eventID)

@@ -10,6 +10,7 @@ public class ChatBehaviourScript : NetworkBehaviour
     [SerializeField] private TMP_Text chatText = null;
     [SerializeField] private TMP_InputField inputField = null;
 
+    public NetworkConnectionToClient conn;
     private static event Action<string> OnMessage;
     public const string PlayerPrefsNameKey = "PlayerName"; //Used as shorcut for writing code
 
@@ -17,6 +18,27 @@ public class ChatBehaviourScript : NetworkBehaviour
     {
         DontDestroyOnLoad(this);
     }
+
+    public void ReadyUpdate(bool isReady)
+    {
+        if (isReady) { Ready(); }
+        else { UnReady(); }
+    }
+
+    [Command] //Tell server that player is ready, call start game check
+    void Ready()
+    {
+        NetworkManagerLobby man = FindObjectOfType<NetworkManagerLobby>();
+        man.PlayerReady();
+    }
+
+    [Command] //Tell server player is not ready
+    void UnReady()
+    {
+        NetworkManagerLobby man = FindObjectOfType<NetworkManagerLobby>();
+        man.PlayerUnReady();
+    }
+
 
     public override void OnStartAuthority()
     {

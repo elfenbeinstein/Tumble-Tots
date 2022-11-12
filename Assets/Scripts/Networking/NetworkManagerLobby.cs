@@ -16,13 +16,15 @@ public class NetworkManagerLobby : NetworkManager
     [SerializeField] List<NetworkRoomPlayer> players;
     [SerializeField] GameObject[] spawnPoints = new GameObject[8];
     [SerializeField] List<GameObject> registeredObjects;
-    [SerializeField] int roundNumber;
-    [SerializeField] int finishedPlayers;
-    [SerializeField] int Qualifiers;
+    [SerializeField] int lobbySize; //Number of players in lobby (used instead of connected players beacaus players can disconnect)
+    [SerializeField] int roundNumber; //Round number
+    [SerializeField] int finishedPlayers; //Players who have completed the current round
+    [SerializeField] int Qualifiers; //Players who must qualify to move to the next round
 
 
     //Network Manager
     [SerializeField] private string menuScene = string.Empty;
+    [SerializeField] private int readyPlayers;
     
     [Header("Room")]
     [SerializeField] private NetworkRoomPlayer roomPlayerPrefab = null;
@@ -99,6 +101,20 @@ public class NetworkManagerLobby : NetworkManager
 
         }
     }
+    public void PlayerReady()
+    {
+        readyPlayers++;
+        if (readyPlayers == players.Count && readyPlayers > 3) //Check if all players are ready and if there are at least 4 players
+        {
+            lobbySize = players.Count;
+            LoadLevel(); 
+        }
+    }
+
+    public void PlayerUnReady() //Remove ready player
+    {
+        readyPlayers--;
+    }
 
     public void LoadLevel()
     {
@@ -139,18 +155,23 @@ public class NetworkManagerLobby : NetworkManager
 
     void Initialize() //Get spawnpoints, update round counter
     {
-        switch (roundNumber)
+        if(lobbySize == 4) //Small lobby size
         {
-            case 1:
-                Qualifiers = 2;
-                break;
-            case 2:
-                Qualifiers = 2;
-                break;
-            case 3:
-                Qualifiers = 1;
-                break;
-
+            if (roundNumber == 1) { Qualifiers = 3; }
+            else if (roundNumber == 2) { Qualifiers = 2; }
+            else if (roundNumber == 3) { Qualifiers = 1; }
+        }
+        if(lobbySize > 4 && lobbySize < 7) //Medium lobby size (5 or 6)
+        {
+            if (roundNumber == 1) { Qualifiers = 4; }
+            else if (roundNumber == 2) { Qualifiers = 2; }
+            else if (roundNumber == 3) { Qualifiers = 1; }
+        }
+        if (lobbySize > 6) //Large lobby size (7 or 8)
+        {
+            if (roundNumber == 1) { Qualifiers = 5; }
+            else if (roundNumber == 2) { Qualifiers = 3; }
+            else if (roundNumber == 3) { Qualifiers = 1; }
         }
 
         spawnPrefabs.Clear();
