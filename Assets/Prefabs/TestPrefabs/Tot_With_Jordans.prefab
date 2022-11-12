@@ -278,6 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  displayNameScript: {fileID: 0}
   body: {fileID: 1476738647576079529}
   cam: {fileID: 7786530273340067764}
   actor: {fileID: 479745952703944571}
