@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using Mirror;
 
 public class InputHandlerAlive : NetworkBehaviour
@@ -46,6 +48,8 @@ public class InputHandlerAlive : NetworkBehaviour
 
     public Vector3 defaultSpawn;
 
+    public TMP_Text playerName;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -64,6 +68,8 @@ public class InputHandlerAlive : NetworkBehaviour
 
         EventSystem.Instance.AddEventListener(playerID, PlayerListener);
         Cursor.visible = false;
+
+        //playerName.gameObject.GetComponent<TextMeshProUGUI>().text = owner.playerName;
     }
 
     private void OnDestroy()

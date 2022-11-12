@@ -12,6 +12,7 @@ TagManager:
   - End
   - Trigger
   - DefaultSpawn
+  - PlayerName
   layers:
   - Default
   - TransparentFX

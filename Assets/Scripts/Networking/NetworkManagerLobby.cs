@@ -217,6 +217,7 @@ public class NetworkManagerLobby : NetworkManager
                 NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
             }
             i++;
+            //newPlayer.GetComponent<InputHandlerAlive>().playerName.text = roomPlayerPrefab.playerName;
         }
     }
 

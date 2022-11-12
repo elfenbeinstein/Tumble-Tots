@@ -1,6 +1,8 @@
 using Mirror;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 public class NetworkRoomPlayer : NetworkBehaviour
 {
@@ -34,6 +36,7 @@ public class NetworkRoomPlayer : NetworkBehaviour
     {
         currentPlayerPrefab = Instantiate(playerTypes[0], this.transform.position, this.transform.rotation);
         currentPlayerPrefab.transform.parent = gameObject.transform; //Spawn and child player gameobject
+        //currentPlayerPrefab.GetComponent<InputHandlerAlive>().playerName.GetComponent<TextMeshProUGUI>().text = playerName;
         NetworkServer.ReplacePlayerForConnection(conn, currentPlayerPrefab); //Re-route current connection to lobby player gameobject
         currentPlayerPrefab.GetComponent<ChatBehaviourScript>().conn = conn;
     }
