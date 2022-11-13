@@ -41,13 +41,20 @@ public class InputHandlerDead : NetworkBehaviour
 
         canShoot = true;
 
-        playerName.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
+        if (isLocalPlayer)
+            CmdSetPlayerName();
     }
 
     void Update()
     {
         PlayerMovement();
         Shooting();
+    }
+
+    [Command]
+    private void CmdSetPlayerName()
+    {
+        playerName.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
     }
 
     private void PlayerMovement()

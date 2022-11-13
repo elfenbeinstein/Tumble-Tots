@@ -47,7 +47,8 @@ public class InputHandlerAlive : NetworkBehaviour
 
     public Vector3 defaultSpawn;
 
-    public TMP_Text playerName;
+    public TMP_Text playerNameText;
+    [SyncVar(hook = "DisplayPlayerName")] public string playerName;
 
     void Start()
     {
@@ -68,7 +69,8 @@ public class InputHandlerAlive : NetworkBehaviour
         EventSystem.Instance.AddEventListener(playerID, PlayerListener);
         Cursor.visible = false;
 
-        playerName.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
+        if (isLocalPlayer)
+            CmdSetPlayerName();
         //playerName.GetComponent<TextMeshProUGUI>().text = owner.playerName;
     }
 
@@ -80,6 +82,18 @@ public class InputHandlerAlive : NetworkBehaviour
     void Update()
     {
         if (isAlive) { HandleInput(); }
+    }
+
+    [Command]
+    public void CmdSetPlayerName()
+    {
+        playerName = PlayerPrefs.GetString("PlayerName");
+        playerNameText.GetComponent<TextMeshProUGUI>().text = playerName;
+    }
+
+    public void DisplayPlayerName(string oldName, string newName)
+    {
+        playerNameText.GetComponent<TextMeshProUGUI>().text = newName;
     }
 
     private void HandleInput()
