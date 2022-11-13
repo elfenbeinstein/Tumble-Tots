@@ -136,6 +136,9 @@ public class NetworkManagerLobby : NetworkManager
             case 3:
                 ServerChangeScene("Tabea_test");
                 break;
+            case 4:
+                ServerChangeScene("Win_Screen");
+                break;
         }
     }
 
@@ -206,6 +209,14 @@ public class NetworkManagerLobby : NetworkManager
                 {
                     newPlayer = Instantiate(player.playerTypes[2], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
                 }
+                else if(SceneManager.GetActiveScene().name == "Win_Screen")
+                {
+                    newPlayer = Instantiate(player.playerTypes[4], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
+                    NetworkServer.Spawn(newPlayer);
+                    player.currentPlayerPrefab = newPlayer;
+                    NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
+                    return;
+                }
                 else
                 {
                     newPlayer = Instantiate(player.playerTypes[1], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
@@ -252,11 +263,19 @@ public class NetworkManagerLobby : NetworkManager
         finishedPlayers++;
         if (finishedPlayers >= Qualifiers)
         {
-            RoundEnd(this.gameObject);
+            if(SceneManager.GetActiveScene().name == "Win_Screen")
+            {
+                GameObject winner = GameObject.FindGameObjectWithTag("Player");
+                RoundEnd(winner);
+            }
+            else
+            {
+                RoundEnd(this.gameObject);
+            }
         }
     }
 
-    public void RoundEnd(GameObject protectedObject)
+    public void RoundEnd(GameObject protectedObject) //Normal round end logic
     {
         //Get all alive players & kill them
         GameObject[] alivePlayers = GameObject.FindGameObjectsWithTag("Player");
@@ -271,7 +290,6 @@ public class NetworkManagerLobby : NetworkManager
                 playerData.isDead = true;
             }
         }
-
         LoadLevel(); //Load next level
     }
 }

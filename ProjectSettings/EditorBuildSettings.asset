@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Julian_test.unity
     guid: 82ad2af84cdffd948a154283e9a1b956
+  - enabled: 1
+    path: Assets/Scenes/Win_Screen.unity
+    guid: 8c0e0dd193a0fb94dbf7480681265946
   m_configObjects: {}
