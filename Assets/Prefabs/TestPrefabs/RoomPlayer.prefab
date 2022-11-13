@@ -69,6 +69,8 @@ MonoBehaviour:
   - {fileID: 2198165985575189082, guid: 5dbb4d4b1d7ff0c4cb749326a79afe15, type: 3}
   - {fileID: 479745952703944561, guid: bba3d86447410c246892e60ae2503d46, type: 3}
   - {fileID: 7992412510714384206, guid: a361f481b67616b4ca75c8ae6ab4b6c9, type: 3}
+  - {fileID: 1419372794916200012, guid: ab94bcc065688af428dd4c60a89e8348, type: 3}
   currentPlayerPrefab: {fileID: 0}
   playerID: 
+  playerName: 
   isDead: 0
