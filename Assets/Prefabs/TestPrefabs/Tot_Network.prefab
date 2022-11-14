@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16615576322039685}
-  m_LocalRotation: {x: 0.33543634, y: -0.000000032418992, z: 0.000000011543292, w: 0.9420629}
+  m_LocalRotation: {x: 0.33543634, y: 0.000000032418992, z: -0.000000011543292, w: 0.9420629}
   m_LocalPosition: {x: 0, y: 9.93, z: -11.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -695,7 +695,8 @@ MonoBehaviour:
   pushBackDuration: 0
   playerID: 
   defaultSpawn: {x: 0, y: 0, z: 0}
-  playerName: {fileID: 7606435987605407263}
+  playerNameText: {fileID: 7606435987605407263}
+  playerName: 
 --- !u!114 &-3456592279316854768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,7 +813,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2678144551377696747}
-  m_LocalRotation: {x: 0.33543628, y: -0.000000016209496, z: 0.000000005771645, w: 0.9420629}
+  m_LocalRotation: {x: 0.33543628, y: 0.000000016209494, z: -0.0000000057716445, w: 0.9420629}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

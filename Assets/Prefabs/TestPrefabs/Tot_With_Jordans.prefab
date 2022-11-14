@@ -298,7 +298,8 @@ MonoBehaviour:
   pushBackDuration: 0
   playerID: 
   defaultSpawn: {x: 0, y: 0, z: 0}
-  playerName: {fileID: 5558946842650707855}
+  playerNameText: {fileID: 5558946842650707855}
+  playerName: 
 --- !u!114 &-91307996145658439
 MonoBehaviour:
   m_ObjectHideFlags: 0

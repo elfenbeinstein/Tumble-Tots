@@ -69,7 +69,7 @@ public class InputHandlerAlive : NetworkBehaviour
         EventSystem.Instance.AddEventListener(playerID, PlayerListener);
         Cursor.visible = false;
 
-        if (isLocalPlayer)
+        if (!isServer && isLocalPlayer)
             CmdSetPlayerName();
         //playerName.GetComponent<TextMeshProUGUI>().text = owner.playerName;
     }
