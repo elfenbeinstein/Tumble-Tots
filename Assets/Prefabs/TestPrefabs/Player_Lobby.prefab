@@ -1725,6 +1725,7 @@ MonoBehaviour:
   chatUI: {fileID: 5758936857717721388}
   chatText: {fileID: 291592812350183565}
   inputField: {fileID: 7656008136493232353}
+  owner: {fileID: 0}
 --- !u!1 &4287046704536281112
 GameObject:
   m_ObjectHideFlags: 0

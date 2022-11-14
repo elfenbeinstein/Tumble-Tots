@@ -61,10 +61,40 @@ public class NetworkManagerLobby : NetworkManager
         OnClientConnected?.Invoke();
     }
 
-    public override void OnClientDisconnect()
+    public override void OnServerDisconnect(NetworkConnectionToClient conn)
+    {
+        base.OnServerDisconnect(conn);
+        StartCoroutine(delayCheck());
+    }
+
+    public override void OnClientDisconnect() //Remove cleint from playerList (prevent null references and ready-up problems)
     {
         base.OnClientDisconnect();
+        StartCoroutine(delayCheck());
         OnClientConnected?.Invoke();
+    }
+
+    IEnumerator delayCheck()
+    {
+        yield return new WaitForSeconds(1);
+        UpdatePlayerList();
+    }
+
+    public void UpdatePlayerList() //Update player list with current connected players
+    {
+        GameObject[] existingPlayers = GameObject.FindGameObjectsWithTag("PlayerHolder");
+        players.Clear();
+        foreach(GameObject player in existingPlayers)
+        {
+            if (player.GetComponent<NetworkRoomPlayer>().currentPlayerPrefab != null) //Add player to list if the player data has a current child
+            {
+                players.Add(player.GetComponent<NetworkRoomPlayer>()); //Destroy player data if they have no current child (player disconnected)
+            }
+            else
+            {
+                Destroy(player);
+            }
+        }
     }
 
     public override void OnServerConnect(NetworkConnectionToClient conn)
