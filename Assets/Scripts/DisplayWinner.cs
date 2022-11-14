@@ -21,13 +21,8 @@ public class DisplayWinner : NetworkBehaviour
     public void CallDisplayWinnerCommand()
     {
         Debug.Log("Called");
-
-        if (!isServer)
-        {
-            Debug.Log("Called");
-            CmdDisplayWinner();
-            Debug.Log("Called");
-        }
+        CmdDisplayWinner();
+        Debug.Log("Called");
     }
 
     [Command]

@@ -24,7 +24,7 @@ public class InputHandlerDead : NetworkBehaviour
 
     public GameObject projectile;
 
-    public TMP_Text playerName;
+    //public TMP_Text playerName;
 
     void Start()
     {
@@ -54,7 +54,7 @@ public class InputHandlerDead : NetworkBehaviour
     [Command]
     private void CmdSetPlayerName()
     {
-        playerName.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
+        //playerName.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
     }
 
     private void PlayerMovement()
