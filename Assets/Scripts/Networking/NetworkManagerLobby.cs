@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-// when you go back to the lobby:
-//EventSystem.Instance.Fire("AUDIO", "lobby");
 
 public class NetworkManagerLobby : NetworkManager
 {
@@ -205,7 +203,10 @@ public class NetworkManagerLobby : NetworkManager
         NetworkServer.Spawn(countDown);
         CountDown(10);
         finishedPlayers = 0;
-        EventSystem.Instance.Fire("AUDIO", "level");
+        if(SceneManager.GetActiveScene().name == "Lobby")
+            EventSystem.Instance.Fire("AUDIO", "lobby");
+        else
+            EventSystem.Instance.Fire("AUDIO", "level");
     }
 
     void Initialize() //Get spawnpoints, update round counter
