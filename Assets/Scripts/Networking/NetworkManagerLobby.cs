@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 // when you go back to the lobby:
@@ -15,6 +16,7 @@ public class NetworkManagerLobby : NetworkManager
     //Game Manager
     [SerializeField] List<NetworkRoomPlayer> players;
     [SerializeField] GameObject[] spawnPoints = new GameObject[8];
+    [SerializeField] GameObject countDownHolder;
     [SerializeField] List<GameObject> registeredObjects;
     [SerializeField] int lobbySize; //Number of players in lobby (used instead of connected players beacaus players can disconnect)
     [SerializeField] int roundNumber; //Round number
@@ -78,6 +80,23 @@ public class NetworkManagerLobby : NetworkManager
     {
         yield return new WaitForSeconds(1);
         UpdatePlayerList();
+    }
+
+    public void CountDown(int remainingTime)
+    {
+        if(remainingTime < 6 && remainingTime > 0) { GameObject.FindGameObjectWithTag("CountDown").GetComponent<TextMeshProUGUI>().text = $"{remainingTime}"; }
+        else if(remainingTime == 0) 
+        { 
+            GameObject.FindGameObjectWithTag("CountDown").GetComponent<TextMeshProUGUI>().text = "GO!"; 
+        }
+        if(remainingTime == -1) { Destroy(GameObject.FindGameObjectWithTag("CountDown")); return; }
+        StartCoroutine(waitForSeconds(remainingTime));
+    }
+
+    IEnumerator waitForSeconds(int _countDown)
+    {
+        yield return new WaitForSeconds(1);
+        CountDown(_countDown - 1);
     }
 
     public void UpdatePlayerList() //Update player list with current connected players
@@ -178,10 +197,13 @@ public class NetworkManagerLobby : NetworkManager
 
 
     //Game manager-related code
-
     private void OnLevelWasLoaded(int level)
     {
         Initialize();
+        GameObject countDown = Instantiate(countDownHolder, transform.position, transform.rotation);
+        countDown.transform.parent = GameObject.FindObjectOfType<Canvas>().transform; //Child text to canvas.
+        NetworkServer.Spawn(countDown);
+        CountDown(10);
         finishedPlayers = 0;
         EventSystem.Instance.Fire("AUDIO", "level");
     }

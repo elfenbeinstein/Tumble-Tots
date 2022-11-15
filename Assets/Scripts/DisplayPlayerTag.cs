@@ -36,9 +36,7 @@ public class DisplayPlayerTag : NetworkBehaviour
 
     public void CallDisplayWinnerCommand()
     {
-        Debug.Log("Called");
         CmdDisplayWinner();
-        Debug.Log("Called");
     }
 
     [Command]

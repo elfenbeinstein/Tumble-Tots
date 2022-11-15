@@ -13,6 +13,7 @@ TagManager:
   - Trigger
   - DefaultSpawn
   - PlayerName
+  - CountDown
   layers:
   - Default
   - TransparentFX

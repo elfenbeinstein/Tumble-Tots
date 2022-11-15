@@ -7,6 +7,7 @@ public class Lava : MonoBehaviour
     [SerializeField] private float riseTime;
     [SerializeField] private float riseAmount;
     private float timeCounter;
+    private float startDelay = 10;
 
     private void Start()
     {
@@ -16,12 +17,18 @@ public class Lava : MonoBehaviour
 
     void Update()
     {
-        timeCounter += Time.deltaTime;
-
-        if (timeCounter >= riseTime/100)
+        if (startDelay <= 0)
         {
-            RaiseLava();
-            timeCounter = 0;
+            timeCounter += Time.deltaTime;
+            if (timeCounter >= riseTime / 100)
+            {
+                RaiseLava();
+                timeCounter = 0;
+            }
+        }
+        else
+        {
+            startDelay -= Time.deltaTime;
         }
     }
 
