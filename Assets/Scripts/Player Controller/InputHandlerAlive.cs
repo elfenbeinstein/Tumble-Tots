@@ -108,23 +108,26 @@ public class InputHandlerAlive : NetworkBehaviour
 
     private void PlayerMovement()
     {
-        moveX = Input.GetAxis("Horizontal");
-        moveZ = Input.GetAxis("Vertical");
-        movementVector = new Vector3(moveX, 0f, moveZ);
-        if (movementVector.magnitude > 1) movementVector = movementVector.normalized;
-
-        if (movementVector.magnitude >= 0.1f)
+        if (isLocalPlayer)
         {
-            //targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
-            targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-            angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            keyRotate.Execute(actor, targetAngle);
+            moveX = Input.GetAxis("Horizontal");
+            moveZ = Input.GetAxis("Vertical");
+            movementVector = new Vector3(moveX, 0f, moveZ);
+            if (movementVector.magnitude > 1) movementVector = movementVector.normalized;
 
-            movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
+            if (movementVector.magnitude >= 0.1f)
+            {
+                //targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
+                targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+                angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                keyRotate.Execute(actor, targetAngle);
 
-            if (isSprinting) movementVector *= sprintMultiplier;
+                movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
 
-            keyMove.Execute(actor, movementVector * movementSpeed * Time.deltaTime);
+                if (isSprinting) movementVector *= sprintMultiplier;
+
+                keyMove.Execute(actor, movementVector * movementSpeed * Time.deltaTime);
+            }
         }
     }
 
