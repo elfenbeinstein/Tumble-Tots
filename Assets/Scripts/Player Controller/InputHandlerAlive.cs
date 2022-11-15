@@ -53,9 +53,10 @@ public class InputHandlerAlive : NetworkBehaviour
 
         if (!isLocalPlayer)
         {
-            Destroy(cam);
+            cam.SetActive(false);
         }
-        cam = GameObject.FindObjectOfType<Camera>().gameObject;
+        else
+            cam = GameObject.FindObjectOfType<Camera>().gameObject;
 
         isAlive = true;
         isSprinting = false;
