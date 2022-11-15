@@ -12,15 +12,16 @@ public class DisplayPlayerTag : NetworkBehaviour
 
     private void Start()
     {
+
+    }
+
+    private void Update() //Rotate names to the current client's camera
+    {
         if (isClient)
         {
             playerName = PlayerPrefs.GetString("PlayerName");
             CmdDisplayWinner(playerName + " :)");
         }
-    }
-
-    private void Update() //Rotate names to the current client's camera
-    {
         GameObject objectToRotate = playerNameText.gameObject;
         Vector3 targetDirection = cameraToLookAt.position - objectToRotate.transform.position;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 360, 0.0f);
