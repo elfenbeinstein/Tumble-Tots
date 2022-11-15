@@ -15,7 +15,7 @@ public class DisplayPlayerTag : NetworkBehaviour
         if (isClient)
         {
             playerName = PlayerPrefs.GetString("PlayerName");
-            CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
+            CmdDisplayWinner(playerName + " :)");
         }
     }
 
