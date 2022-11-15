@@ -19,8 +19,7 @@ public class DisplayPlayerTag : NetworkBehaviour
     {
         if (isClient)
         {
-            playerName = PlayerPrefs.GetString("PlayerName");
-            CmdDisplayWinner(playerName + " :)");
+            CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
         }
         GameObject objectToRotate = playerNameText.gameObject;
         Vector3 targetDirection = cameraToLookAt.position - objectToRotate.transform.position;
@@ -40,13 +39,11 @@ public class DisplayPlayerTag : NetworkBehaviour
     [Command]
     public void CmdDisplayWinner(string name)
     {
-        Debug.Log(name);
-        playerNameText.text = name;
+        playerName = name;
     }
 
     public void DisplayWinnerName(string oldName, string newName)
     {
-        Debug.Log(newName);
         playerNameText.text = newName;
     }
 }
