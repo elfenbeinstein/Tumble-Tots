@@ -151,7 +151,7 @@ public class NetworkManagerLobby : NetworkManager
     public void PlayerReady()
     {
         readyPlayers++;
-        if (readyPlayers == players.Count && players.Count > 3) //Check if all players are ready and if there are at least 4 players
+        if (readyPlayers == players.Count) //Check if all players are ready and if there are at least 4 players
         {
             lobbySize = players.Count;
             LoadLevel(); 
