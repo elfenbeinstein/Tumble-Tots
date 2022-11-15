@@ -14,7 +14,7 @@ public class DisplayPlayerTag : NetworkBehaviour
     {
         if (!isServer)
         {
-            CmdDisplayWinner();
+            CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
         }
     }
 
@@ -36,14 +36,13 @@ public class DisplayPlayerTag : NetworkBehaviour
 
     public void CallDisplayWinnerCommand()
     {
-        CmdDisplayWinner();
+        CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
     }
 
     [Command]
-    public void CmdDisplayWinner()
+    public void CmdDisplayWinner(string name)
     {
-        playerName = PlayerPrefs.GetString("PlayerName");
-        playerNameText.text = playerName;
+        playerNameText.text = name;
     }
 
     public void DisplayWinnerName(string oldName, string newName)

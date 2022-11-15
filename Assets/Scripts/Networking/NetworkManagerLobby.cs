@@ -85,7 +85,8 @@ public class NetworkManagerLobby : NetworkManager
         if(remainingTime < 6 && remainingTime > 0) { GameObject.FindGameObjectWithTag("CountDown").GetComponent<TextMeshProUGUI>().text = $"{remainingTime}"; }
         else if(remainingTime == 0) 
         { 
-            GameObject.FindGameObjectWithTag("CountDown").GetComponent<TextMeshProUGUI>().text = "GO!"; 
+            GameObject.FindGameObjectWithTag("CountDown").GetComponent<TextMeshProUGUI>().text = "GO!";
+            EventSystem.Instance.Fire("AUDIO", "start");
         }
         if(remainingTime == -1) { Destroy(GameObject.FindGameObjectWithTag("CountDown")); return; }
         StartCoroutine(waitForSeconds(remainingTime));
@@ -211,7 +212,7 @@ public class NetworkManagerLobby : NetworkManager
 
     void Initialize() //Get spawnpoints, update round counter
     {
-        if(lobbySize == 4) //Small lobby size
+        if(lobbySize <= 4) //Small lobby size
         {
             if (roundNumber == 1) { Qualifiers = 3; }
             else if (roundNumber == 2) { Qualifiers = 2; }

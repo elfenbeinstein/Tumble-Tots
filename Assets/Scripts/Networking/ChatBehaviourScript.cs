@@ -67,15 +67,15 @@ public class ChatBehaviourScript : NetworkBehaviour
 
         if (string.IsNullOrWhiteSpace(inputField.text)) { return; }
 
-        CmdSendMessage(inputField.text);
+        CmdSendMessage(PlayerPrefs.GetString(PlayerPrefsNameKey), inputField.text);
 
         inputField.text = string.Empty;
     }
 
     [Command]
-    private void CmdSendMessage(string message)
+    private void CmdSendMessage(string name, string message)
     {
-        RpcHandleMessage($"[{PlayerPrefs.GetString(PlayerPrefsNameKey, "FawnAlloy")}]: {message}");
+        RpcHandleMessage($"[{name}]: {message}");
     }
 
     [ClientRpc]
