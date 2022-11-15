@@ -53,7 +53,7 @@ public class InputHandlerAlive : NetworkBehaviour
 
         if (!isLocalPlayer)
         {
-            Destroy(cam);
+            cam.SetActive(false);
         }
         else
             cam = GameObject.FindObjectOfType<Camera>().gameObject;
@@ -76,7 +76,7 @@ public class InputHandlerAlive : NetworkBehaviour
 
     void Update()
     {
-        if (isAlive) { HandleInput(); }
+        HandleInput();
     }
 
     private void HandleInput()

@@ -35,7 +35,7 @@ public class NetworkManagerLobby : NetworkManager
 
     public override void OnStartServer() => spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
 
-    private void Start()
+    private void Awake()
     {
         registeredObjects.Clear();
         foreach(GameObject rObject in spawnPrefabs)
