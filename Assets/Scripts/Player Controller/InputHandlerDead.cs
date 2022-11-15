@@ -24,8 +24,6 @@ public class InputHandlerDead : NetworkBehaviour
 
     public GameObject projectile;
 
-    //public TMP_Text playerName;
-
     void Start()
     {
         if (isLocalPlayer)
@@ -40,21 +38,12 @@ public class InputHandlerDead : NetworkBehaviour
         Cursor.visible = false;
 
         canShoot = true;
-
-        if (isLocalPlayer)
-            CmdSetPlayerName();
     }
 
     void Update()
     {
         PlayerMovement();
         Shooting();
-    }
-
-    [Command]
-    private void CmdSetPlayerName()
-    {
-        //playerName.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
     }
 
     private void PlayerMovement()

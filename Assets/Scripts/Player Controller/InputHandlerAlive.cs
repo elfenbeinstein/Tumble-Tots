@@ -47,9 +47,6 @@ public class InputHandlerAlive : NetworkBehaviour
 
     public Vector3 defaultSpawn;
 
-    public TMP_Text playerNameText;
-    [SyncVar(hook = "DisplayPlayerName")] public string playerName;
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -68,10 +65,6 @@ public class InputHandlerAlive : NetworkBehaviour
 
         EventSystem.Instance.AddEventListener(playerID, PlayerListener);
         Cursor.visible = false;
-
-        if (!isServer && isLocalPlayer)
-            CmdSetPlayerName();
-        //playerName.GetComponent<TextMeshProUGUI>().text = owner.playerName;
     }
 
     private void OnDestroy()
@@ -82,18 +75,6 @@ public class InputHandlerAlive : NetworkBehaviour
     void Update()
     {
         if (isAlive) { HandleInput(); }
-    }
-
-    [Command]
-    public void CmdSetPlayerName()
-    {
-        playerName = PlayerPrefs.GetString("PlayerName");
-        playerNameText.GetComponent<TextMeshProUGUI>().text = playerName;
-    }
-
-    public void DisplayPlayerName(string oldName, string newName)
-    {
-        playerNameText.GetComponent<TextMeshProUGUI>().text = newName;
     }
 
     private void HandleInput()
