@@ -12,8 +12,11 @@ public class DisplayPlayerTag : NetworkBehaviour
 
     private void Start()
     {
-        playerName = PlayerPrefs.GetString("PlayerName");
-        CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
+        if (isClient)
+        {
+            playerName = PlayerPrefs.GetString("PlayerName");
+            CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
+        }
     }
 
     private void Update() //Rotate names to the current client's camera
