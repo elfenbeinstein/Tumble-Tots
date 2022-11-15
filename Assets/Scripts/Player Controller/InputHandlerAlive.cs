@@ -8,6 +8,7 @@ public class InputHandlerAlive : NetworkBehaviour
 {
     [SerializeField] private Transform body;
     [SerializeField] private GameObject cam;
+    [SerializeField] private GameObject camActual;
 
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
@@ -55,8 +56,7 @@ public class InputHandlerAlive : NetworkBehaviour
         {
             cam.SetActive(false);
         }
-        else
-            cam = GameObject.FindObjectOfType<Camera>().gameObject;
+        cam = camActual;
 
         isAlive = true;
         isSprinting = false;

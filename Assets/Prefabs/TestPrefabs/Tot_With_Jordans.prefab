@@ -283,6 +283,7 @@ MonoBehaviour:
   syncInterval: 0.1
   body: {fileID: 1476738647576079529}
   cam: {fileID: 7786530273340067764}
+  camActual: {fileID: 7573981794864429722}
   actor: {fileID: 479745952703944571}
   movementSpeed: 6
   turnSmoothTime: 0.1
@@ -300,8 +301,6 @@ MonoBehaviour:
   pushBackDuration: 0
   playerID: 
   defaultSpawn: {x: 0, y: 0, z: 0}
-  playerNameText: {fileID: 5558946842650707855}
-  playerName: 
 --- !u!114 &-91307996145658439
 MonoBehaviour:
   m_ObjectHideFlags: 0
