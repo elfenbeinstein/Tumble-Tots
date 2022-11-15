@@ -55,6 +55,7 @@ public class InputHandlerAlive : NetworkBehaviour
         {
             Destroy(cam);
         }
+        cam = GameObject.FindObjectOfType<Camera>().gameObject;
 
         isAlive = true;
         isSprinting = false;

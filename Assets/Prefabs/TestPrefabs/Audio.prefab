@@ -464,5 +464,5 @@ MonoBehaviour:
   lobbyAS: {fileID: 5338344994040939507}
   durationFadeIn: 2
   durationFadeOut: 2
-  volumeLevel: 0.6
-  volumeLobby: 0.4
+  volumeLevel: 0.4
+  volumeLobby: 0.3
