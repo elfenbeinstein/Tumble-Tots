@@ -30,7 +30,8 @@ public class InputHandlerDead : NetworkBehaviour
         {
             cam.SetActive(true);
         }
-        cam = GameObject.FindObjectOfType<Camera>().gameObject;
+        else
+            cam = GameObject.FindObjectOfType<Camera>().gameObject;
 
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
