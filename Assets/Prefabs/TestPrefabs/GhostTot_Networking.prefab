@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1517564951918804551}
   - component: {fileID: 1517564951918804548}
   - component: {fileID: 1517564951918804549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1517564953601165066}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerFeet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1517564953604173720}
   - component: {fileID: 1517564953604173717}
   - component: {fileID: 1517564953604173722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 6202073106670831837}
   - component: {fileID: 4123107018280816427}
   - component: {fileID: 3232737649527357477}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: PlayerName
   m_TagString: PlayerName
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 8808595669307605653}
   - component: {fileID: 4157762790463010794}
   - component: {fileID: 2345767453258654460}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 709696240123702540}
   - component: {fileID: 5895059870357527516}
   - component: {fileID: 4435907602802761798}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4140333874793396524}
   - component: {fileID: 4140333874793396525}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MiddleRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -696,7 +696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4140333875212446038}
   - component: {fileID: 4140333875212446039}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4140333875609573077}
   - component: {fileID: 4140333875609573082}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CM FreeLook1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,7 +915,7 @@ GameObject:
   - component: {fileID: 4140333876097958176}
   - component: {fileID: 4140333876097958179}
   - component: {fileID: 4140333876097958178}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1042,7 +1042,7 @@ GameObject:
   - component: {fileID: 4140333876229717962}
   - component: {fileID: 4140333876229717957}
   - component: {fileID: 4140333876229717956}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1169,7 +1169,7 @@ GameObject:
   - component: {fileID: 4140333876332093008}
   - component: {fileID: 4140333876332093011}
   - component: {fileID: 4140333876332093010}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1294,7 +1294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4140333876540194139}
   - component: {fileID: 4140333876540194136}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BottomRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1378,7 +1378,7 @@ GameObject:
   - component: {fileID: 2448270913045146546}
   - component: {fileID: 648267512418491175}
   - component: {fileID: 4415006344915969376}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GhostTot_Networking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1511,7 +1511,6 @@ MonoBehaviour:
   turnSmoothTime: 0.1
   cooldown: 0.3
   projectile: {fileID: 3528170664908743302, guid: 5b87bd8b0bf1e1c44be89f25dedd842a, type: 3}
-  playerName: {fileID: 0}
 --- !u!114 &648267512418491175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1578,7 +1577,7 @@ GameObject:
   - component: {fileID: 5183044083414274376}
   - component: {fileID: 4720026164686686609}
   - component: {fileID: 1102960079988078805}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1695,7 +1694,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2673147480809476575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
