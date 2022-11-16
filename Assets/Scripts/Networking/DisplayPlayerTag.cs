@@ -13,6 +13,7 @@ public class DisplayPlayerTag : NetworkBehaviour
     GameObject[] objectToRotate;
     Transform cameraToLookAt; //Camera to rotate text towards
     [SyncVar(hook = "DisplayWinnerName")] public string playerName; //Sync variable of the player's name
+    public string pID;
 
     private void Start()
     {
@@ -27,6 +28,7 @@ public class DisplayPlayerTag : NetworkBehaviour
         }
         //Lookat the active camera
         //GameObject objectToRotate[] = playerNameText.gameObject;
+        if (cameraToLookAt == null) return;
         foreach (GameObject tag in objectToRotate)
         {
             Vector3 targetDirection = cameraToLookAt.position - tag.transform.position;
@@ -40,9 +42,26 @@ public class DisplayPlayerTag : NetworkBehaviour
         if(cameraToLookAt == null)
         {
             //cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
+            /*
             if (gameObject.GetComponent<InputHandlerAlive>() != null) cameraToLookAt = gameObject.GetComponent<InputHandlerAlive>().GetCamera().transform;
             else if (gameObject.GetComponent<InputHandlerDead>() != null) cameraToLookAt = gameObject.GetComponent<InputHandlerDead>().GetCamera().transform;
             else cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
+            */
+            Camera[] cams = GameObject.FindObjectsOfType<Camera>();
+            if (cams.Length != 0)
+            {
+                for (int i = 0; i < cams.Length; i++)
+                {
+                    string idInCam = "";
+                    if (cams[i].GetComponentInParent<InputHandlerAlive>() != null) idInCam = cams[i].GetComponentInParent<InputHandlerAlive>().playerID;
+                    else if (cams[i].GetComponentInParent<InputHandlerDead>() != null) idInCam = cams[i].GetComponentInParent<InputHandlerDead>().playerID;
+                    if (idInCam != "")
+                    {
+                        if (idInCam == pID) cameraToLookAt = cams[i].transform;
+                    }
+                }
+            }
+
         }
     }
 

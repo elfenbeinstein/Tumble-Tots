@@ -292,6 +292,7 @@ public class NetworkManagerLobby : NetworkManager
                 player.currentPlayerPrefab = newPlayer;
                 newPlayer.GetComponent<InputHandlerAlive>().playerID = player.playerID;
                 newPlayer.GetComponent<InputHandlerAlive>().owner = player;
+                if (newPlayer.GetComponent<DisplayPlayerTag>() != null) newPlayer.GetComponent<DisplayPlayerTag>().pID = player.playerID;
                 NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
             }
             i++;
@@ -315,6 +316,8 @@ public class NetworkManagerLobby : NetworkManager
             GameObject spectator = Instantiate(player.playerTypes[3], spawnPoints[1].transform.position, spawnPoints[1].transform.rotation);
             NetworkServer.Spawn(spectator);
             player.currentPlayerPrefab = spectator;
+            if (spectator.GetComponent<InputHandlerDead>() != null) spectator.GetComponent<InputHandlerDead>().playerID = player.playerID;
+            if (spectator.GetComponent<DisplayPlayerTag>() != null) spectator.GetComponent<DisplayPlayerTag>().pID = player.playerID;
             NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
         }
     }
@@ -324,6 +327,8 @@ public class NetworkManagerLobby : NetworkManager
         GameObject ghost = Instantiate(player.playerTypes[3], spawnPoints[1].transform.position, spawnPoints[1].transform.rotation);
         NetworkServer.Spawn(ghost);
         player.currentPlayerPrefab = ghost;
+        if (ghost.GetComponent<InputHandlerDead>() != null) ghost.GetComponent<InputHandlerDead>().playerID = player.playerID;
+        if (ghost.GetComponent<DisplayPlayerTag>() != null) ghost.GetComponent<DisplayPlayerTag>().pID = player.playerID;
         player.isDead = true; //Set player data to dead
         NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
 
