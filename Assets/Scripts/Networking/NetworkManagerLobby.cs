@@ -184,13 +184,13 @@ public class NetworkManagerLobby : NetworkManager
         switch (roundNumber)
         {
             case 1:
-                ServerChangeScene("Race_Obstacles");
+                ServerChangeScene("Tabea_test"); // Race_Obstacles
                 break;
             case 2:
                 ServerChangeScene("Julian_test");
                 break;
             case 3:
-                ServerChangeScene("Tabea_test");
+                ServerChangeScene("Tabea_test"); 
                 break;
             case 4:
                 ServerChangeScene("Win_Screen");

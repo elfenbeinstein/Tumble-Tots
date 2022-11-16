@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class MovingPlatformT : MonoBehaviour
+public class MovingPlatformT : NetworkBehaviour
 {
     [SerializeField] private Transform pos1;
     [SerializeField] private Transform pos2;
@@ -31,7 +32,8 @@ public class MovingPlatformT : MonoBehaviour
 
     void Update()
     {
-        if (moves) // so that it's synced via the network and they start moving at the same time
+        if (!isServer) return;
+        if (moves) // so they  only start moving after go
         {
             if (up)
             {
