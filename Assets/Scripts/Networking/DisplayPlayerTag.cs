@@ -39,7 +39,7 @@ public class DisplayPlayerTag : NetworkBehaviour
 
     private void FixedUpdate() //If there is no camera to look at, find and set the variable. Called in fixed update to account for delayed connections to game
     {
-        if(cameraToLookAt == null)
+        if(cameraToLookAt == null || !cameraToLookAt.gameObject.activeInHierarchy)
         {
             //cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
             /*
