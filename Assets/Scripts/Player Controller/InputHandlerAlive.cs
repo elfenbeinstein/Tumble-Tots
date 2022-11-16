@@ -46,6 +46,8 @@ public class InputHandlerAlive : NetworkBehaviour
     public float pushBackDuration;
     public string playerID;
 
+    public GameObject currentSpawnpoint;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -205,7 +207,11 @@ public class InputHandlerAlive : NetworkBehaviour
         if (other.tag == "Trigger")
         {
             Debug.Log("Trigger!");
-            transform.position = GameObject.FindGameObjectWithTag("DefaultSpawn").transform.position;
+            if (currentSpawnpoint == null)
+            {
+                transform.position = GameObject.FindGameObjectWithTag("DefaultSpawn").transform.position;
+            }
+            transform.position = currentSpawnpoint.transform.position;
         }
     }
 }

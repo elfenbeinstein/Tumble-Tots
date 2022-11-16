@@ -238,7 +238,7 @@ public class NetworkManagerLobby : NetworkManager
             else if (roundNumber == 2) { Qualifiers = 3; }
             else if (roundNumber == 3) { Qualifiers = 1; }
         }
-
+        if (lobbySize == 2) { Qualifiers = 2; }
         spawnPrefabs.Clear();
         foreach(GameObject rObject in registeredObjects)
         {
