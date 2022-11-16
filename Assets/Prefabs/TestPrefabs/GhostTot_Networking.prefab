@@ -1378,6 +1378,7 @@ GameObject:
   - component: {fileID: 2448270913045146546}
   - component: {fileID: 648267512418491175}
   - component: {fileID: 4415006344915969376}
+  - component: {fileID: 6662572079623521552}
   m_Layer: 6
   m_Name: GhostTot_Networking
   m_TagString: Untagged
@@ -1565,7 +1566,21 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerNameText: {fileID: 4435907602802761798}
+  cameraToLookAt: {fileID: 0}
   playerName: 
+  pID: 
+--- !u!114 &6662572079623521552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7992412510714384206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b743111fa22f5954f96ed703881a8f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8843714512252113824
 GameObject:
   m_ObjectHideFlags: 0

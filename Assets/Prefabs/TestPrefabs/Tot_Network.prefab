@@ -605,6 +605,7 @@ GameObject:
   - component: {fileID: -8742378489645326161}
   - component: {fileID: 3294435104781498311}
   - component: {fileID: 6055813028634885576}
+  - component: {fileID: 833432831381343188}
   m_Layer: 0
   m_Name: Tot_Network
   m_TagString: Player
@@ -804,7 +805,21 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerNameText: {fileID: 2083183955142378559}
+  cameraToLookAt: {fileID: 0}
   playerName: 
+  pID: 
+--- !u!114 &833432831381343188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2198165985575189082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b743111fa22f5954f96ed703881a8f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2678144551377696747
 GameObject:
   m_ObjectHideFlags: 3
@@ -1464,7 +1479,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7749822478425909146}
-  m_LocalRotation: {x: 0.35251644, y: -0.00000002277142, z: 0.000000008577956, w: 0.9358056}
+  m_LocalRotation: {x: 0.35251644, y: 0.000000022771424, z: -0.000000008577958, w: 0.9358056}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
