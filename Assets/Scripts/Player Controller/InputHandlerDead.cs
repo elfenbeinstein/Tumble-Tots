@@ -17,8 +17,8 @@ public class InputHandlerDead : NetworkBehaviour
 
     private float moveX, moveZ;
     private Vector3 movementVector;
-    private float targetAngle, angle;
-    private float turnSmoothVelocity;
+    private float targetAngle;//, angle; obsolete
+    //private float turnSmoothVelocity;
     private float flyDirection;
     public float cooldown;
 

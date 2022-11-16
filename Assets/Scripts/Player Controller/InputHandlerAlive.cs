@@ -26,8 +26,8 @@ public class InputHandlerAlive : NetworkBehaviour
     private float moveX, moveZ;
     private Vector3 movementVector;
     private Vector3 lastMovement;
-    private float targetAngle, angle; // angle also obsolete
-    private float turnSmoothVelocity; // obsolete
+    private float targetAngle;//, angle; // angle obsolete
+    //private float turnSmoothVelocity; // obsolete
 
     /* when we had sprint instead of dash -- obsolete
     [SerializeField] private float sprintMultiplier = 1;
