@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Catapult Obstacle in third level - survival (called Tabea_test in Unity)
+/// catapults player if they step into trigger zone
+/// </summary>
+
 public class Catapult : MonoBehaviour
 {
     [SerializeField] private int throwDuration;
@@ -22,9 +27,11 @@ public class Catapult : MonoBehaviour
         canCatapult = true;
         catapultsPlayers = false;
         playerOnCWhileGoingDown = false;
+
         players = new List<Actor>();
         movePlayer = new MoveActor();
         anim = GetComponent<Animator>();
+
         direction = target.position - gameObject.transform.position;
     }
 
@@ -32,6 +39,7 @@ public class Catapult : MonoBehaviour
     {
         if (catapultsPlayers)
         {
+            // this whole throwCount was a workaround that I never got around to changing because it worked and there were bigger fish to fry
             throwCount += 1;
             if (throwCount < throwDuration)
             {
@@ -52,12 +60,13 @@ public class Catapult : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Actor>() != null)
         {
-            // missing (probably) distinction between whether player is alive or not
+            // Add player to list of players to be catapulted
             players.Add(other.gameObject.GetComponent<Actor>());
             if (canCatapult)
                 StartCoroutine(WaitTilUp());
             else
             {
+                // if players enter while it's going down, it will catapult again once it's down
                 playerOnCWhileGoingDown = true;
             }
         }
@@ -67,7 +76,6 @@ public class Catapult : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Actor>() != null)
         {
-            // missing (probably) distinction between whether player is alive or not
             players.Remove(other.gameObject.GetComponent<Actor>());
 
             if (players.Count == 0)
@@ -80,20 +88,14 @@ public class Catapult : MonoBehaviour
     IEnumerator WaitTilUp()
     {
         yield return new WaitForSeconds(0.2f);
+
         anim.SetTrigger("PlayerOnPlatform");
         canCatapult = false;
+
         yield return new WaitForSeconds(0.2f);
+
         catapultsPlayers = true;
         playerOnCWhileGoingDown = false;
-        /* -- moved to the Update method for testing
-        for (int i = players.Count-1; i >= 0; i--)
-        {
-            //Debug.Log("catapult " + players[i].gameObject);
-            // add force to players;
-            movePlayer.Execute(players[i], direction * force * 10 * Time.deltaTime);
-            //players[i].cc.Move(direction * force * 10 * Time.deltaTime);
-        }
-        */
     }
 
     // called from animation

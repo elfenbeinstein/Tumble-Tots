@@ -13,7 +13,7 @@ public class InputHandlerDead : NetworkBehaviour
 
     bool canShoot;
 
-    CommandMovement keyMove, keyRotate, keyShoot;
+    CommandMovement keyMove, keyRotate;
 
     private float moveX, moveZ;
     private Vector3 movementVector;
@@ -35,11 +35,10 @@ public class InputHandlerDead : NetworkBehaviour
 
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
-        keyShoot = new Shooting();
 
         Cursor.visible = false;
 
-        canShoot = true;
+        canShoot = true; // Player can shoot at the beginning
     }
 
     void Update()
@@ -80,13 +79,14 @@ public class InputHandlerDead : NetworkBehaviour
         }
     }
 
+    //Calls Command function that spawns a bullet (projectile)
     public void Shooting()
     {
         if (Input.GetKeyDown(KeyCode.Space) && canShoot == true && isLocalPlayer)
         {
             Shoot();
-            EventSystem.Instance.Fire("AUDIO", "shoot");
-            canShoot = false;
+            EventSystem.Instance.Fire("AUDIO", "shoot"); //Play audio
+            canShoot = false; // Player cannot shoot now
             StartCoroutine(Cooldown());
         }
     }
@@ -96,9 +96,10 @@ public class InputHandlerDead : NetworkBehaviour
     {
         Debug.Log("Called;");
         GameObject bullet = GameObject.Instantiate(projectile, actor.shootingPoint.transform.position, actor.shootingPoint.transform.rotation); //Create bullet
-        NetworkServer.Spawn(bullet);
+        NetworkServer.Spawn(bullet); // Spawn bullet
     }
 
+    // Cooldown before player can shoot again
     IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(cooldown);
