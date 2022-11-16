@@ -12,17 +12,12 @@ public class DisplayWinner : NetworkBehaviour
 
     [SyncVar(hook = "DisplayWinnerName")] public string winnerName; //Sync variable to display the winner's name on all other clients
 
-    private void Start()
+    private void FixedUpdate()
     {
-        if (!isServer)
+        if (isServer)
         {
             CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
         }
-    }
-
-    public void CallDisplayWinnerCommand() //Display the winner name on the server, and sync it
-    {
-        CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
     }
 
     [Command] //Set the winner name on the server and sync to other clients

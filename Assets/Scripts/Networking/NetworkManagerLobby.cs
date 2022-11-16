@@ -279,6 +279,7 @@ public class NetworkManagerLobby : NetworkManager
                     NetworkServer.Spawn(newPlayer);
                     player.currentPlayerPrefab = newPlayer;
                     NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
+                    ShowCursors();
                     return;
                 }
                 else //Basic tot
@@ -297,6 +298,11 @@ public class NetworkManagerLobby : NetworkManager
         }
     }
 
+    [ClientRpc]
+    void ShowCursors()
+    {
+        Cursor.visible = true;
+    }
     public void PlayerDone(NetworkRoomPlayer player) //Ran when a player completes the round.
     {
         finishedPlayers++; //Qualification Logic
