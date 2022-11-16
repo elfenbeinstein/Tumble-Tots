@@ -172,7 +172,7 @@ public class InputHandlerAlive : NetworkBehaviour
 
         while (Time.time < startTime + dashDuration)
         {
-            if (movementVector.magnitude < 0.1f) movementVector = Vector3.forward;
+            if (movementVector.magnitude < 0.1f) movementVector = transform.forward;
             keyMove.Execute(actor, movementVector * dashForce * Time.deltaTime);
             yield return null;
         }
