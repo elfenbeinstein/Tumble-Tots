@@ -4,6 +4,10 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 
+/// <summary>
+/// Displays the winner's name at the end of the game
+/// </summary>
+
 public class DisplayWinner : NetworkBehaviour
 {
     [SerializeField] TextMeshProUGUI winnerNameText;

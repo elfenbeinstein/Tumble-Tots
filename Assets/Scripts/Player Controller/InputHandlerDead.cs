@@ -35,7 +35,6 @@ public class InputHandlerDead : NetworkBehaviour
 
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
-        keyShoot = new Shooting();
 
         Cursor.visible = false;
 

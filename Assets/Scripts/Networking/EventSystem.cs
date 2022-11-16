@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Event System is used for audio implementation (see audio scripts)
+/// obsolete version also had the lava use event system when player fell in lava --> Xavi changed it to work with the networking and we're not using it like that anymore
+/// </summary>
+
 public class EventSystem
 {
     private static EventSystem instance;
@@ -47,7 +52,5 @@ public class EventSystem
         if (eventListener.ContainsKey(eventID))
             for (int i = eventListener[eventID].Count - 1; i >= 0; i--)
                 eventListener[eventID][i](eventName, param);
-
-        System.Diagnostics.Debug.WriteLine(string.Format("Event {0} fired: {1}, {2}", eventID, eventName, param));
     }
 }

@@ -4,16 +4,15 @@ using UnityEngine;
 using TMPro;
 using Mirror;
 
+/// <summary>
+/// Displays the player tag over our tots for other players to see.
+/// </summary>
+
 public class DisplayPlayerTag : NetworkBehaviour
 {
     [SerializeField] TextMeshPro playerNameText;
     Transform cameraToLookAt;
     [SyncVar(hook = "DisplayWinnerName")] public string playerName;
-
-    private void Start()
-    {
-
-    }
 
     private void Update() //Rotate names to the current client's camera
     {

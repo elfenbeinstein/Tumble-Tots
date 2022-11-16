@@ -1,8 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class EndPSurvival : MonoBehaviour
+/// <summary>
+/// last platform in survival round
+/// if it carries a player it moves up and stays there (so every other player will eventually die by lava)
+/// if player leaves platform again (e.g. cause they were shot down by a dead player) it moves down for next player
+/// </summary>
+
+public class EndPSurvival : NetworkBehaviour
 {
     [SerializeField] private float endHeight;
     [SerializeField] private Vector3 direction;
@@ -30,8 +37,11 @@ public class EndPSurvival : MonoBehaviour
 
     void Update()
     {
+        if (!isServer) return;
+
         if (carriesPlayer && shouldMoveUp)
         {
+            // the movement calculation here was meant to be a temporary solution, but never got changed cause it worked, even tho it's frame rate dependent
             gameObject.transform.position += direction / 1000;
             for (int i = players.Count - 1; i >= 0; i--)
             {
