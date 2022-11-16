@@ -10,8 +10,14 @@ using Mirror;
 public class DisplayPlayerTag : NetworkBehaviour
 {
     [SerializeField] TextMeshPro playerNameText; //Name component
+    GameObject[] objectToRotate;
     Transform cameraToLookAt; //Camera to rotate text towards
     [SyncVar(hook = "DisplayWinnerName")] public string playerName; //Sync variable of the player's name
+
+    private void Start()
+    {
+        objectToRotate = GameObject.FindGameObjectsWithTag("PlayerTag");
+    }
 
     private void Update() //Rotate names to the current client's camera
     {
@@ -20,10 +26,13 @@ public class DisplayPlayerTag : NetworkBehaviour
             CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
         }
         //Lookat the active camera
-        GameObject objectToRotate = playerNameText.gameObject;
-        Vector3 targetDirection = cameraToLookAt.position - objectToRotate.transform.position;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 360, 0.0f);
-        objectToRotate.transform.rotation = Quaternion.LookRotation(-1 * newDirection);
+        //GameObject objectToRotate[] = playerNameText.gameObject;
+        foreach (GameObject tag in objectToRotate)
+        {
+            Vector3 targetDirection = cameraToLookAt.position - tag.transform.position;
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 360, 0.0f);
+            tag.transform.rotation = Quaternion.LookRotation(-1 * newDirection);
+        }
     }
 
     private void FixedUpdate() //If there is no camera to look at, find and set the variable. Called in fixed update to account for delayed connections to game

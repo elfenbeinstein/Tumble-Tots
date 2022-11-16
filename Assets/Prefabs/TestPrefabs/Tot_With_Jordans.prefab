@@ -288,7 +288,6 @@ MonoBehaviour:
   movementSpeed: 6
   turnSmoothTime: 0.1
   owner: {fileID: 0}
-  sprintMultiplier: 2.01
   playerFeet: {fileID: 479745951021444656}
   isGrounded: 0
   groundCheckMask:
@@ -300,7 +299,7 @@ MonoBehaviour:
   dashCooldown: 1
   pushBackDuration: 0
   playerID: 
-  defaultSpawn: {x: 0, y: 0, z: 0}
+  currentSpawnpoint: {fileID: 0}
 --- !u!114 &-91307996145658439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1555,7 +1554,7 @@ GameObject:
   - component: {fileID: 696686079239605454}
   m_Layer: 0
   m_Name: PlayerName
-  m_TagString: Untagged
+  m_TagString: PlayerTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
