@@ -64,8 +64,8 @@ public class InputHandlerDead : NetworkBehaviour
             {
                 // rotate the player according to the position they're moving in while adjusting for the current position of the camera:
                 targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-                angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-                keyRotate.Execute(actor, angle);
+                //angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime); obsolete
+                keyRotate.Execute(actor, targetAngle);
 
                 movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized; ;
 
