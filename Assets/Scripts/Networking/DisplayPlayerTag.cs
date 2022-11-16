@@ -11,7 +11,7 @@ public class DisplayPlayerTag : NetworkBehaviour
 {
     [SerializeField] TextMeshPro playerNameText; //Name component
     GameObject[] objectToRotate;
-    Transform cameraToLookAt; //Camera to rotate text towards
+    [SerializeField] Transform cameraToLookAt; //Camera to rotate text towards
     [SyncVar(hook = "DisplayWinnerName")] public string playerName; //Sync variable of the player's name
     public string pID;
 
@@ -41,12 +41,14 @@ public class DisplayPlayerTag : NetworkBehaviour
     {
         if(cameraToLookAt == null || !cameraToLookAt.gameObject.activeInHierarchy)
         {
-            //cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
+            cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
             /*
             if (gameObject.GetComponent<InputHandlerAlive>() != null) cameraToLookAt = gameObject.GetComponent<InputHandlerAlive>().GetCamera().transform;
             else if (gameObject.GetComponent<InputHandlerDead>() != null) cameraToLookAt = gameObject.GetComponent<InputHandlerDead>().GetCamera().transform;
             else cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
             */
+
+            /*
             Camera[] cams = GameObject.FindObjectsOfType<Camera>();
             if (cams.Length != 0)
             {
@@ -61,7 +63,7 @@ public class DisplayPlayerTag : NetworkBehaviour
                     }
                 }
             }
-
+            */
         }
     }
 
