@@ -11,7 +11,6 @@ public class InputHandlerDead : NetworkBehaviour
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
-    public string playerID;
 
     bool canShoot;
 

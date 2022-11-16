@@ -11,6 +11,7 @@ public class DisplayPlayerTag : NetworkBehaviour
 {
     [SerializeField] TextMeshPro playerNameText; //Name component
     GameObject[] objectToRotate;
+    GameObject rObject;
     [SerializeField] Transform cameraToLookAt; //Camera to rotate text towards
     [SyncVar(hook = "DisplayWinnerName")] public string playerName; //Sync variable of the player's name
     public string pID;
@@ -26,7 +27,11 @@ public class DisplayPlayerTag : NetworkBehaviour
         {
             CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
         }
+
+        rObject = playerNameText.gameObject;
+
         //Lookat the active camera
+        /*
         //GameObject objectToRotate[] = playerNameText.gameObject;
         if (cameraToLookAt == null) return;
         foreach (GameObject tag in objectToRotate)
@@ -35,6 +40,12 @@ public class DisplayPlayerTag : NetworkBehaviour
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 360, 0.0f);
             tag.transform.rotation = Quaternion.LookRotation(-1 * newDirection);
         }
+        */
+
+        Vector3 targetDirection = cameraToLookAt.position - rObject.transform.position;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 360, 0.0f);
+        rObject.transform.rotation = Quaternion.LookRotation(-1 * newDirection);
+
     }
 
     private void FixedUpdate() //If there is no camera to look at, find and set the variable. Called in fixed update to account for delayed connections to game
@@ -42,28 +53,6 @@ public class DisplayPlayerTag : NetworkBehaviour
         if(cameraToLookAt == null || !cameraToLookAt.gameObject.activeInHierarchy)
         {
             cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
-            /*
-            if (gameObject.GetComponent<InputHandlerAlive>() != null) cameraToLookAt = gameObject.GetComponent<InputHandlerAlive>().GetCamera().transform;
-            else if (gameObject.GetComponent<InputHandlerDead>() != null) cameraToLookAt = gameObject.GetComponent<InputHandlerDead>().GetCamera().transform;
-            else cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
-            */
-
-            /*
-            Camera[] cams = GameObject.FindObjectsOfType<Camera>();
-            if (cams.Length != 0)
-            {
-                for (int i = 0; i < cams.Length; i++)
-                {
-                    string idInCam = "";
-                    if (cams[i].GetComponentInParent<InputHandlerAlive>() != null) idInCam = cams[i].GetComponentInParent<InputHandlerAlive>().playerID;
-                    else if (cams[i].GetComponentInParent<InputHandlerDead>() != null) idInCam = cams[i].GetComponentInParent<InputHandlerDead>().playerID;
-                    if (idInCam != "")
-                    {
-                        if (idInCam == pID) cameraToLookAt = cams[i].transform;
-                    }
-                }
-            }
-            */
         }
     }
 
