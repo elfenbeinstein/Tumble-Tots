@@ -14,21 +14,19 @@ public class DisplayWinner : NetworkBehaviour
     {
         if (!isServer)
         {
-            CmdDisplayWinner();
+            CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
         }
     }
 
     public void CallDisplayWinnerCommand()
     {
-        Debug.Log("Called");
-        CmdDisplayWinner();
-        Debug.Log("Called");
+        CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
     }
 
     [Command]
-    public void CmdDisplayWinner()
+    public void CmdDisplayWinner(string playerName)
     {
-        winnerName = PlayerPrefs.GetString("PlayerName");
+        winnerName = playerName;
         winnerNameText.text = winnerName;
     }
 
