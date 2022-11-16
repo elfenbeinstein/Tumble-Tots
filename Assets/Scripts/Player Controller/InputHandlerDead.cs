@@ -7,6 +7,7 @@ using TMPro;
 public class InputHandlerDead : NetworkBehaviour
 {
     [SerializeField] private GameObject cam;
+    [SerializeField] private GameObject camActual;
     [SerializeField] private Actor actor;
     [SerializeField] private float movementSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
@@ -26,12 +27,13 @@ public class InputHandlerDead : NetworkBehaviour
 
     void Start()
     {
+        cam = camActual;
         if (isLocalPlayer)
         {
             cam.SetActive(true);
         }
         else
-            cam = GameObject.FindObjectOfType<Camera>().gameObject;
+            if (cam == null) cam = GameObject.FindObjectOfType<Camera>().gameObject;
 
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
@@ -104,5 +106,10 @@ public class InputHandlerDead : NetworkBehaviour
     {
         yield return new WaitForSeconds(cooldown);
         canShoot = true;
+    }
+
+    public GameObject GetCamera()
+    {
+        return camActual;
     }
 }

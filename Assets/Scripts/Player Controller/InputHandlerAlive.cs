@@ -232,4 +232,9 @@ public class InputHandlerAlive : NetworkBehaviour
             transform.position = currentSpawnpoint.transform.position;
         }
     }
+
+    public GameObject GetCamera()
+    {
+        return camActual;
+    }
 }

@@ -39,7 +39,10 @@ public class DisplayPlayerTag : NetworkBehaviour
     {
         if(cameraToLookAt == null)
         {
-            cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
+            //cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
+            if (gameObject.GetComponent<InputHandlerAlive>() != null) cameraToLookAt = gameObject.GetComponent<InputHandlerAlive>().GetCamera().transform;
+            else if (gameObject.GetComponent<InputHandlerDead>() != null) cameraToLookAt = gameObject.GetComponent<InputHandlerDead>().GetCamera().transform;
+            else cameraToLookAt = GameObject.FindObjectOfType<Camera>().transform;
         }
     }
 
