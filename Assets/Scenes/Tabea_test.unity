@@ -2015,7 +2015,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2344787724336769753, guid: f1755ccc31148f84997f3bf3e9ced26b, type: 3}
       propertyPath: riseAmount
-      value: 0.4
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2344787724336769762, guid: f1755ccc31148f84997f3bf3e9ced26b, type: 3}
       propertyPath: m_Name
@@ -8780,7 +8780,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2344787724336769753, guid: f1755ccc31148f84997f3bf3e9ced26b, type: 3}
       propertyPath: riseAmount
-      value: 0.4
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2344787724336769762, guid: f1755ccc31148f84997f3bf3e9ced26b, type: 3}
       propertyPath: m_Name
