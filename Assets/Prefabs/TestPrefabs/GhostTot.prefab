@@ -76,7 +76,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 15
+    m_MaxSpeed: 100
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse ScrollWheel
@@ -241,7 +241,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040032739}
-  m_LocalRotation: {x: 0.33766714, y: -0.26874587, z: 0.10123613, w: 0.89638597}
+  m_LocalRotation: {x: 0.33766714, y: -0.2687459, z: 0.10123614, w: 0.89638597}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -319,7 +319,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287780328}
-  m_LocalRotation: {x: 0.3048831, y: -0.27224588, z: 0.09140712, w: 0.90806013}
+  m_LocalRotation: {x: 0.3048831, y: -0.2722459, z: 0.091407135, w: 0.9080602}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -766,6 +766,7 @@ GameObject:
   - component: {fileID: 3204894914022454518}
   - component: {fileID: 3204894914022454519}
   - component: {fileID: 3204894914022454515}
+  - component: {fileID: 2113272652454790916}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -853,12 +854,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5c5130f9b67e340b5ebb03a6e9fdb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   cam: {fileID: 3907976451115217510}
+  camActual: {fileID: 0}
   actor: {fileID: 6313953683242780159}
   movementSpeed: 6
   turnSmoothTime: 0.1
   cooldown: 2.5
   projectile: {fileID: 7320670370091379534, guid: 186daa3c4bdfa5e43ae07f615c047dcf, type: 3}
+--- !u!114 &2113272652454790916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3204894914022454521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: ad031c6394a88c0458690c985a297dd5
+  hasSpawned: 0
 --- !u!1 &3204894914488470969
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,8 +1020,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4885918267428919570}
-  m_LocalRotation: {x: 0.23564956, y: -0.6704354, z: 0.23871905, w: 0.6618148}
-  m_LocalPosition: {x: 12.039055, y: 13.629999, z: 4.3863616}
+  m_LocalRotation: {x: 0.32130644, y: -0.2705428, z: 0.09633101, w: 0.90237975}
+  m_LocalPosition: {x: 7.0824037, y: 9.93, z: -9.444459}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

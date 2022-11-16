@@ -151,7 +151,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420498688329118197}
-  m_LocalRotation: {x: 0.31829068, y: -0.000000016311532, z: 0.0000000054766307, w: 0.94799316}
+  m_LocalRotation: {x: 0.31829068, y: 0.000000016311532, z: -0.0000000054766307, w: 0.94799316}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -314,7 +314,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971723780444734672}
-  m_LocalRotation: {x: 0.33543628, y: -0.000000016209496, z: 0.000000005771645, w: 0.9420629}
+  m_LocalRotation: {x: 0.33543628, y: 0.000000016209494, z: -0.0000000057716445, w: 0.9420629}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -566,11 +566,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  body: {fileID: 0}
   cam: {fileID: 8157464129603164081}
+  camActual: {fileID: 0}
   actor: {fileID: 2198165985575189072}
   movementSpeed: 6
   turnSmoothTime: 0.1
-  sprintMultiplier: 2.01
+  owner: {fileID: 0}
   playerFeet: {fileID: 2198165984974930715}
   isGrounded: 0
   groundCheckMask:
@@ -582,6 +584,7 @@ MonoBehaviour:
   dashCooldown: 1
   pushBackDuration: 0
   playerID: 
+  currentSpawnpoint: {fileID: 0}
 --- !u!114 &8566487077589051543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,7 +883,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8157464129603164081}
-  m_LocalRotation: {x: 0.33543634, y: -0.000000032418992, z: 0.000000011543292, w: 0.9420629}
+  m_LocalRotation: {x: 0.33543634, y: 0.000000032418992, z: -0.000000011543292, w: 0.9420629}
   m_LocalPosition: {x: 0, y: 9.93, z: -11.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1098,7 +1101,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 15
+    m_MaxSpeed: 100
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse ScrollWheel
