@@ -25,6 +25,7 @@ public class InputHandlerAlive : NetworkBehaviour
 
     private float moveX, moveZ;
     private Vector3 movementVector;
+    private Vector3 lastMovement;
     private float targetAngle, angle; // angle also obsolete
     private float turnSmoothVelocity; // obsolete
 
@@ -136,6 +137,7 @@ public class InputHandlerAlive : NetworkBehaviour
                 keyRotate.Execute(actor, targetAngle);
 
                 movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
+                lastMovement = movementVector;
 
                 //if (isSprinting) movementVector *= sprintMultiplier;
 
@@ -172,8 +174,8 @@ public class InputHandlerAlive : NetworkBehaviour
 
         while (Time.time < startTime + dashDuration)
         {
-            if (movementVector.magnitude < 0.1f) movementVector = transform.forward;
-            keyMove.Execute(actor, movementVector * dashForce * Time.deltaTime);
+            if (movementVector.magnitude < 0.1f) keyMove.Execute(actor, lastMovement * dashForce * Time.deltaTime);
+            else keyMove.Execute(actor, movementVector * dashForce * Time.deltaTime);
             yield return null;
         }
     }
