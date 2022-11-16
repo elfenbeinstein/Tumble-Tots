@@ -11,6 +11,7 @@ public class ChatBehaviourScript : NetworkBehaviour
     [SerializeField] private TMP_InputField inputField = null;
 
     public NetworkConnectionToClient conn;
+
     private static event Action<string> OnMessage;
     public const string PlayerPrefsNameKey = "PlayerName"; //Used as shorcut for writing code
 
