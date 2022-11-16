@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
-
+/// <summary>
+/// This script is responsible for handling the player's name at the start of the game
+/// </summary>
 public class PlayerNameInput : MonoBehaviour
 {
-    [Header("UI")]
+    [Header("UI")] //UI related variables
     [SerializeField] private TMP_InputField nameInputField = null;
     [SerializeField] private Button continueButton = null;
 
@@ -17,7 +19,7 @@ public class PlayerNameInput : MonoBehaviour
         SetUpInputField();
     }
 
-    private void SetUpInputField()
+    private void SetUpInputField() //If the player had a name before, put that as the default.
     {
         if(!PlayerPrefs.HasKey(PlayerPrefsNameKey)) { return; }
 
@@ -28,14 +30,14 @@ public class PlayerNameInput : MonoBehaviour
         SetPlayerName(defaultName);
     }
 
-    public void SetPlayerName(string name)
+    public void SetPlayerName(string name) //Set the player name to what was in the input field
     {
         if(string.IsNullOrEmpty(name)) { name = nameInputField.text; }
 
         continueButton.interactable = !string.IsNullOrEmpty(name);
     }
 
-    public void SavePlayerName()
+    public void SavePlayerName() //Save the player name locally using PlayerPrefs
     {
         DisplayName = nameInputField.text;
 

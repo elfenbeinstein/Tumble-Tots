@@ -3,7 +3,10 @@ using System;
 using Mirror;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// This script handles the pre-game lobby chat. The 3 serialized fields are references to text object which display the chat and input field.
+/// This script also handles if the client is currently ready to start. The function resides here, but this ready data is stored on the server networkmanager
+/// </summary>
 public class ChatBehaviourScript : NetworkBehaviour
 {
     [SerializeField] private GameObject chatUI = null;
@@ -20,7 +23,7 @@ public class ChatBehaviourScript : NetworkBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void ReadyUpdate(bool isReady)
+    public void ReadyUpdate(bool isReady) //Updates the status of this player to if they are ready/not ready to start playing
     {
         if (isReady) { Ready(); }
         else { UnReady(); }
@@ -41,7 +44,7 @@ public class ChatBehaviourScript : NetworkBehaviour
     }
 
 
-    public override void OnStartAuthority()
+    public override void OnStartAuthority() //Enable the chat UI when this object gains the authority to use it
     {
         chatUI.SetActive(true);
 
@@ -56,13 +59,13 @@ public class ChatBehaviourScript : NetworkBehaviour
         OnMessage -= HandleNewMessage;
     }
 
-    private void HandleNewMessage(string message)
+    private void HandleNewMessage(string message) //Set the chat text to include the player's message
     {
         chatText.text += message;
     }
 
     [Client]
-    public void Send()
+    public void Send() //Send and package the written message for the server to process (client-side)
     {
         if(!Input.GetKeyDown(KeyCode.Return)) { return; }
 
@@ -73,13 +76,13 @@ public class ChatBehaviourScript : NetworkBehaviour
         inputField.text = string.Empty;
     }
 
-    [Command]
+    [Command] //Send written message (server-side)
     private void CmdSendMessage(string name, string message)
     {
         RpcHandleMessage($"[{name}]: {message}");
     }
 
-    [ClientRpc]
+    [ClientRpc] //Rpc check
     private void RpcHandleMessage(string message)
     {
         OnMessage?.Invoke($"\n{message}");

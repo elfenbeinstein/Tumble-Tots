@@ -3,31 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Mirror;
-
+/// <summary>
+/// This script is responsible for displaying a player's tag above their head using-
+/// sync Variables and sending a player's name to the server to update other clients
+/// </summary>
 public class DisplayPlayerTag : NetworkBehaviour
 {
-    [SerializeField] TextMeshPro playerNameText;
-    Transform cameraToLookAt;
-    [SyncVar(hook = "DisplayWinnerName")] public string playerName;
-
-    private void Start()
-    {
-
-    }
+    [SerializeField] TextMeshPro playerNameText; //Name component
+    Transform cameraToLookAt; //Camera to rotate text towards
+    [SyncVar(hook = "DisplayWinnerName")] public string playerName; //Sync variable of the player's name
 
     private void Update() //Rotate names to the current client's camera
     {
-        if (isClient)
+        if (isClient) //If is client, update the server with this player's name (stored locally on machine with PlayerPrefs)
         {
             CmdDisplayWinner(PlayerPrefs.GetString("PlayerName"));
         }
+        //Lookat the active camera
         GameObject objectToRotate = playerNameText.gameObject;
         Vector3 targetDirection = cameraToLookAt.position - objectToRotate.transform.position;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 360, 0.0f);
         objectToRotate.transform.rotation = Quaternion.LookRotation(-1 * newDirection);
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() //If there is no camera to look at, find and set the variable. Called in fixed update to account for delayed connections to game
     {
         if(cameraToLookAt == null)
         {
@@ -36,12 +35,12 @@ public class DisplayPlayerTag : NetworkBehaviour
     }
 
 
-    [Command]
+    [Command] //Updates the other clients with the given name
     public void CmdDisplayWinner(string name)
     {
         playerName = name;
     }
-
+    //Hook for playerName sync variable
     public void DisplayWinnerName(string oldName, string newName)
     {
         playerNameText.text = newName;

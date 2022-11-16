@@ -6,16 +6,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-
-
-
+/// <summary>
+/// This script is responsible for managing the network connections in the lobby, and also serves as a game manager
+/// </summary>
 public class NetworkManagerLobby : NetworkManager
 {
     //Game Manager
-    [SerializeField] List<NetworkRoomPlayer> players;
-    [SerializeField] GameObject[] spawnPoints = new GameObject[8];
-    [SerializeField] GameObject countDownHolder;
-    [SerializeField] List<GameObject> registeredObjects;
+    [SerializeField] List<NetworkRoomPlayer> players; //List of connected players
+    [SerializeField] GameObject[] spawnPoints = new GameObject[8]; //Spawnpoints to spawn players (got later in script)
+    [SerializeField] GameObject countDownHolder; //Holds the object that counts down the start of the round
+    [SerializeField] List<GameObject> registeredObjects; //List of registered objects that can be spawned by the server
     [SerializeField] int lobbySize; //Number of players in lobby (used instead of connected players beacaus players can disconnect)
     [SerializeField] int roundNumber; //Round number
     [SerializeField] int finishedPlayers; //Players who have completed the current round
@@ -35,7 +35,7 @@ public class NetworkManagerLobby : NetworkManager
 
     public override void OnStartServer() => spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
 
-    private void Awake()
+    private void Awake() //Start lobby music, create copy of registered objects
     {
         registeredObjects.Clear();
         foreach(GameObject rObject in spawnPrefabs)
@@ -45,7 +45,7 @@ public class NetworkManagerLobby : NetworkManager
         EventSystem.Instance.Fire("AUDIO", "lobby");
     }
 
-    public override void OnStartClient()
+    public override void OnStartClient() //Setup client networkManager's registered prefabs
     {
         var spawnablePrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs");
 
@@ -55,32 +55,32 @@ public class NetworkManagerLobby : NetworkManager
         }
     }
 
-    public override void OnClientConnect()
+    public override void OnClientConnect() //Called when client connects
     {
         base.OnClientConnect();
         OnClientConnected?.Invoke();
     }
 
-    public override void OnServerDisconnect(NetworkConnectionToClient conn)
+    public override void OnServerDisconnect(NetworkConnectionToClient conn) //Called when the server disconnects
     {
         base.OnServerDisconnect(conn);
         StartCoroutine(delayCheck());
     }
 
-    public override void OnClientDisconnect() //Remove cleint from playerList (prevent null references and ready-up problems)
+    public override void OnClientDisconnect() //Remove client from playerList (prevent null references and ready-up problems)
     {
         base.OnClientDisconnect();
         StartCoroutine(delayCheck());
         OnClientConnected?.Invoke();
     }
 
-    IEnumerator delayCheck()
+    IEnumerator delayCheck() //Delays server checks to account for lag
     {
         yield return new WaitForSeconds(1);
         UpdatePlayerList();
     }
 
-    public void CountDown(int remainingTime)
+    public void CountDown(int remainingTime) //Start countdown before round starts
     {
         if(remainingTime < 6 && remainingTime > 0) { GameObject.FindGameObjectWithTag("CountDown").GetComponent<TextMeshProUGUI>().text = $"{remainingTime}"; }
         else if(remainingTime == 0) 
@@ -100,7 +100,7 @@ public class NetworkManagerLobby : NetworkManager
         StartCoroutine(waitForSeconds(remainingTime));
     }
 
-    IEnumerator waitForSeconds(int _countDown)
+    IEnumerator waitForSeconds(int _countDown) //Used for the countdown logic
     {
         yield return new WaitForSeconds(1);
         CountDown(_countDown - 1);
@@ -123,7 +123,7 @@ public class NetworkManagerLobby : NetworkManager
         }
     }
 
-    public override void OnServerConnect(NetworkConnectionToClient conn)
+    public override void OnServerConnect(NetworkConnectionToClient conn) //Ensure that the connecting client can join the lobby (not too full)
     {
         if(numPlayers >= maxConnections)
         {
@@ -138,7 +138,7 @@ public class NetworkManagerLobby : NetworkManager
         }
     }
 
-    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn) //Add a player object, add them to the player list
     {
         if(SceneManager.GetActiveScene().path == menuScene)
         {
@@ -157,10 +157,10 @@ public class NetworkManagerLobby : NetworkManager
 
         }
     }
-    public void PlayerReady()
+    public void PlayerReady() //Readys a player up, checks if conditions are met
     {
         readyPlayers++;
-        if (readyPlayers == players.Count) //Check if all players are ready and if there are at least 4 players
+        if (readyPlayers == players.Count && players.Count > 3) //Check if all players are ready and if there are at least 4 players
         {
             lobbySize = players.Count;
             LoadLevel(); 
@@ -172,9 +172,9 @@ public class NetworkManagerLobby : NetworkManager
         readyPlayers--;
     }
 
-    public void LoadLevel()
+    public void LoadLevel() //Loads the specified level for the corresponding round number
     {
-        foreach (NetworkRoomPlayer player in players)
+        foreach (NetworkRoomPlayer player in players) //Remove all child objects from playerdata holders
         {
             player.RemoveAllChildren();
         }
@@ -204,12 +204,12 @@ public class NetworkManagerLobby : NetworkManager
 
 
     //Game manager-related code
-    private void OnLevelWasLoaded(int level)
+    private void OnLevelWasLoaded(int level) //Initialize the level when the game is loaded
     {
         Initialize();
-        GameObject countDown = Instantiate(countDownHolder, transform.position, transform.rotation);
+        GameObject countDown = Instantiate(countDownHolder, transform.position, transform.rotation); //Create countdown object
         countDown.transform.parent = GameObject.FindObjectOfType<Canvas>().transform; //Child text to canvas.
-        NetworkServer.Spawn(countDown);
+        NetworkServer.Spawn(countDown); //Spawn the countdown object on all clients
         CountDown(10);
         finishedPlayers = 0;
         if(SceneManager.GetActiveScene().name == "Lobby")
@@ -238,7 +238,9 @@ public class NetworkManagerLobby : NetworkManager
             else if (roundNumber == 2) { Qualifiers = 3; }
             else if (roundNumber == 3) { Qualifiers = 1; }
         }
-        if (lobbySize == 2) { Qualifiers = 2; }
+
+        if (lobbySize == 2) { Qualifiers = 2; } //Used for debugging purposes (only occurs when force-starting a game on the server)
+
         spawnPrefabs.Clear();
         foreach(GameObject rObject in registeredObjects)
         {
@@ -251,7 +253,7 @@ public class NetworkManagerLobby : NetworkManager
         SpawnPlayers();
     }
 
-    void SpawnPlayers()
+    void SpawnPlayers() //Spawns all connected players with their corresponding player prefab
     {
         int i = 0;
 
@@ -267,11 +269,11 @@ public class NetworkManagerLobby : NetworkManager
             }
             else //Type of tot
             {
-                if(SceneManager.GetActiveScene().name == "Race_Obstacles")
+                if(SceneManager.GetActiveScene().name == "Race_Obstacles") //Tot with the Jordans
                 {
                     newPlayer = Instantiate(player.playerTypes[2], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
                 }
-                else if(SceneManager.GetActiveScene().name == "Win_Screen")
+                else if(SceneManager.GetActiveScene().name == "Win_Screen") //Win-screen tot
                 {
                     newPlayer = Instantiate(player.playerTypes[4], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
                     NetworkServer.Spawn(newPlayer);
@@ -279,10 +281,11 @@ public class NetworkManagerLobby : NetworkManager
                     NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
                     return;
                 }
-                else
+                else //Basic tot
                 {
                     newPlayer = Instantiate(player.playerTypes[1], spawnPoints[i].transform.position, spawnPoints[i].transform.rotation);
                 }
+                //Spawn the created player on all clients
                 NetworkServer.Spawn(newPlayer);
                 player.currentPlayerPrefab = newPlayer;
                 newPlayer.GetComponent<InputHandlerAlive>().playerID = player.playerID;
@@ -294,14 +297,14 @@ public class NetworkManagerLobby : NetworkManager
         }
     }
 
-    public void PlayerDone(NetworkRoomPlayer player)
+    public void PlayerDone(NetworkRoomPlayer player) //Ran when a player completes the round.
     {
         finishedPlayers++; //Qualification Logic
-        if (finishedPlayers >= Qualifiers)
+        if (finishedPlayers >= Qualifiers) //If enough players have qualified, end the round
         {
             RoundEnd(player.currentPlayerPrefab);
         }
-        else
+        else //Else, turn the winner into a ghost spectator
         {
             NetworkServer.ReplacePlayerForConnection(player.conn, player.gameObject); //Give connection back to data object
             player.RemoveAllChildren(); //Destroy previous player object
@@ -314,7 +317,7 @@ public class NetworkManagerLobby : NetworkManager
         }
     }
 
-    public void KillPlayer(NetworkRoomPlayer player)
+    public void KillPlayer(NetworkRoomPlayer player) //Kill the player. Turn them into a ghost, set their status to dead
     {
         GameObject ghost = Instantiate(player.playerTypes[3], spawnPoints[1].transform.position, spawnPoints[1].transform.rotation);
         NetworkServer.Spawn(ghost);
@@ -322,13 +325,13 @@ public class NetworkManagerLobby : NetworkManager
         player.isDead = true; //Set player data to dead
         NetworkServer.ReplacePlayerForConnection(player.conn, player.currentPlayerPrefab);
 
-        finishedPlayers++;
-        if (finishedPlayers >= Qualifiers)
+        finishedPlayers++; //Because there are less competitors, count it as a 'victory'
+        if (finishedPlayers >= Qualifiers) //End the round differently, depending on the level
         {
-            if(SceneManager.GetActiveScene().name == "Win_Screen")
+            if(SceneManager.GetActiveScene().name == "Win_Screen") 
             {
                 GameObject winner = GameObject.FindGameObjectWithTag("Player");
-                RoundEnd(winner);
+                RoundEnd(winner); 
             }
             else
             {
@@ -342,7 +345,7 @@ public class NetworkManagerLobby : NetworkManager
         //Get all alive players & kill them
         GameObject[] alivePlayers = GameObject.FindGameObjectsWithTag("Player");
 
-        foreach(GameObject player in alivePlayers)
+        foreach(GameObject player in alivePlayers) //Kill all remaining alive players 
         {
             if (player != protectedObject)
             {
