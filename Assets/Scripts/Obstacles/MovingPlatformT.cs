@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+/// <summary>
+/// moving platforms in last level
+/// </summary>
+
 public class MovingPlatformT : NetworkBehaviour
 {
     [SerializeField] private Transform pos1;

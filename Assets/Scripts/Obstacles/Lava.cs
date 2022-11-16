@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// lava in last level --> rises constantly and when touching a player sends message that player is dead
+/// </summary>
+
 public class Lava : MonoBehaviour
 {
     [SerializeField] private float riseTime;

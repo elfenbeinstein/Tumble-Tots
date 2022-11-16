@@ -4,6 +4,11 @@ using UnityEngine;
 using TMPro;
 using Mirror;
 
+/// <summary>
+/// handles all behaviour for the alive player
+/// --> move, jump, double jump, dash
+/// </summary>
+
 public class InputHandlerAlive : NetworkBehaviour
 {
     [SerializeField] private Transform body;
@@ -20,11 +25,13 @@ public class InputHandlerAlive : NetworkBehaviour
 
     private float moveX, moveZ;
     private Vector3 movementVector;
-    private float targetAngle, angle;
-    private float turnSmoothVelocity;
+    private float targetAngle, angle; // angle also obsolete
+    private float turnSmoothVelocity; // obsolete
 
+    /* when we had sprint instead of dash -- obsolete
     [SerializeField] private float sprintMultiplier = 1;
     bool isSprinting;
+    */
 
     [Space]
     [Header("Gravity related variables:")]
@@ -58,13 +65,15 @@ public class InputHandlerAlive : NetworkBehaviour
         }
         cam = camActual;
 
-        isAlive = true;
-        isSprinting = false;
+        //isAlive = true;
+        //isSprinting = false;
         canDash = true;
 
+        // set up for command movement
         keyMove = new MoveActor();
         keyRotate = new RotateActor();
 
+        // obsolete -- used by lava (but not anymore, cause it now goes via the server)
         EventSystem.Instance.AddEventListener(playerID, PlayerListener);
         Cursor.visible = false;
     }
@@ -118,16 +127,17 @@ public class InputHandlerAlive : NetworkBehaviour
             // normalise input:
             if (movementVector.magnitude > 1) movementVector = movementVector.normalized;
 
+
             if (movementVector.magnitude >= 0.1f)
             {
                 // rotate the player according to the position they're moving in while adjusting for the current position of the camera:
                 targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
                 angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-                keyRotate.Execute(actor, targetAngle);
+                keyRotate.Execute(actor, angle);
 
                 movementVector = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized;
 
-                if (isSprinting) movementVector *= sprintMultiplier;
+                //if (isSprinting) movementVector *= sprintMultiplier;
 
                 keyMove.Execute(actor, movementVector * movementSpeed * Time.deltaTime);
             }
@@ -153,6 +163,7 @@ public class InputHandlerAlive : NetworkBehaviour
         }
     }
 
+    // adds extra force to the player while dashing
     IEnumerator Dashing()
     {
         StartCoroutine(DashCoolDown());
@@ -161,6 +172,7 @@ public class InputHandlerAlive : NetworkBehaviour
 
         while (Time.time < startTime + dashDuration)
         {
+            if (movementVector.magnitude < 0.1f) movementVector = Vector3.forward;
             keyMove.Execute(actor, movementVector * dashForce * Time.deltaTime);
             yield return null;
         }
@@ -174,6 +186,7 @@ public class InputHandlerAlive : NetworkBehaviour
         canDash = true;
     }
 
+    // obsolete -- used to be used by lava for testing
     private void PlayerListener(string eventName, object param)
     {
         if (eventName == "TouchedLava")
@@ -185,7 +198,9 @@ public class InputHandlerAlive : NetworkBehaviour
             }
         }
     }
+   
 
+    // these two functions are used for when a player is hit by a projectile
     public void Push(Vector3 direction, float duration)
     {
         StartCoroutine(PushBack(direction, duration));
@@ -202,6 +217,7 @@ public class InputHandlerAlive : NetworkBehaviour
         }
     }
 
+    // for spawning players in levels 1/2 when they leave the course
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Trigger")
