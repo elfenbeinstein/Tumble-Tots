@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+/// <summary>
+/// handles the music of levels and lobby and fades between the two
+/// subscribes to the EventListener "AUDIO"
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private AudioMixer mixer;
@@ -18,9 +22,13 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         EventSystem.Instance.AddEventListener("AUDIO", AudioListener);
+
+        // make sure there's only one AudioManager in the scene:
         GameObject[] objs = GameObject.FindGameObjectsWithTag("AudioManager");
         if (objs.Length > 1) Destroy(this.gameObject);
         DontDestroyOnLoad(this.gameObject);
+
+        // get the correct setup for the mixer sliders
         EventSystem.Instance.Fire("AUDIO", "music", PlayerPrefs.GetFloat("MusicVolume", 0.75f));
         EventSystem.Instance.Fire("AUDIO", "sfx", PlayerPrefs.GetFloat("SFXVolume", 0.75f));
     }
@@ -101,6 +109,8 @@ public class AudioManager : MonoBehaviour
         yield break;
     }
 
+
+    // only used for debugging
     [ContextMenu("remove player prefs")]
     private void RemovePlayerPrefs()
     {

@@ -8,6 +8,7 @@ public class MovingPlatformT : MonoBehaviour
     [SerializeField] private Transform pos2;
     [SerializeField] private Vector3 direction;
     bool up;
+    bool moves;
 
     // stuff to move player:
     bool carriesPlayer;
@@ -16,48 +17,55 @@ public class MovingPlatformT : MonoBehaviour
 
     void Start()
     {
+        moves = false;
         up = true;
         carriesPlayer = false;
         players = new List<Actor>();
         movePlayer = new MoveActor();
     }
 
+    public void Go()
+    {
+        moves = true;
+    }
+
     void Update()
     {
-        if (up)
+        if (moves) // so that it's synced via the network and they start moving at the same time
         {
-            gameObject.transform.position += direction / 1000;
-            if (Vector3.Distance(gameObject.transform.position, pos2.position) <= 0.3f)
+            if (up)
             {
-                up = false;
-            }
-
-            if (carriesPlayer)
-            {
-                for (int i = players.Count - 1; i >= 0; i--)
+                gameObject.transform.position += direction / 1000;
+                if (Vector3.Distance(gameObject.transform.position, pos2.position) <= 0.3f)
                 {
-                    movePlayer.Execute(players[i], (direction / 1000));
+                    up = false;
+                }
+
+                if (carriesPlayer)
+                {
+                    for (int i = players.Count - 1; i >= 0; i--)
+                    {
+                        movePlayer.Execute(players[i], (direction / 1000));
+                    }
+                }
+            }
+            else
+            {
+                gameObject.transform.position -= direction / 1000;
+                if (Vector3.Distance(gameObject.transform.position, pos1.position) <= 0.3f)
+                {
+                    up = true;
+                }
+
+                if (carriesPlayer)
+                {
+                    for (int i = players.Count - 1; i >= 0; i--)
+                    {
+                        movePlayer.Execute(players[i], (-1 * direction / 1000));
+                    }
                 }
             }
         }
-        else
-        {
-            gameObject.transform.position -= direction / 1000;
-            if (Vector3.Distance(gameObject.transform.position, pos1.position) <= 0.3f)
-            {
-                up = true;
-            }
-
-            if (carriesPlayer)
-            {
-                for (int i = players.Count - 1; i >= 0; i--)
-                {
-                    movePlayer.Execute(players[i], (-1 * direction / 1000));
-                }
-            }
-        }
-
-        
     }
 
     private void OnTriggerEnter(Collider other)

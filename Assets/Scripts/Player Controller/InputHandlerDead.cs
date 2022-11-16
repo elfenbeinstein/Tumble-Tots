@@ -52,6 +52,7 @@ public class InputHandlerDead : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            // get player input:
             moveX = Input.GetAxis("Horizontal");
             moveZ = Input.GetAxis("Vertical");
             movementVector = new Vector3(moveX, 0f, moveZ);
@@ -62,6 +63,7 @@ public class InputHandlerDead : NetworkBehaviour
 
             if (movementVector.magnitude >= 0.1f)
             {
+                // rotate the player according to the position they're moving in while adjusting for the current position of the camera:
                 targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
                 angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                 keyRotate.Execute(actor, targetAngle);

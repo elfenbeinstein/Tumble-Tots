@@ -15,6 +15,7 @@ TagManager:
   - PlayerName
   - CountDown
   - TriggerZone
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX

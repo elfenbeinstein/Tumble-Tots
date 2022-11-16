@@ -15,7 +15,7 @@ public class InputHandlerAlive : NetworkBehaviour
     [SerializeField] private float turnSmoothTime = 0.1f;
     public NetworkRoomPlayer owner;
 
-    bool isAlive;
+    bool isAlive; // obsolete, used during testing
     CommandMovement keyMove, keyRotate;
 
     private float moveX, moveZ;
@@ -109,14 +109,16 @@ public class InputHandlerAlive : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            // Get Player Input:
             moveX = Input.GetAxis("Horizontal");
             moveZ = Input.GetAxis("Vertical");
             movementVector = new Vector3(moveX, 0f, moveZ);
+            // normalise input:
             if (movementVector.magnitude > 1) movementVector = movementVector.normalized;
 
             if (movementVector.magnitude >= 0.1f)
             {
-                //targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg;
+                // rotate the player according to the position they're moving in while adjusting for the current position of the camera:
                 targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
                 angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                 keyRotate.Execute(actor, targetAngle);

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// obsolete -- we started doing some stuff with this and then ended up switching to the cinemachine
+/// </summary>
+
 public class CameraBehaviour : MonoBehaviour
 {
     [SerializeField] public GameObject player; // find via script later

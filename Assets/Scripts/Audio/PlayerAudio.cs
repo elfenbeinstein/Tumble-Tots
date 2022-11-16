@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// handles all sfx of the players, e.g. dashing, jumping, shooting
+/// </summary>
+
 public class PlayerAudio : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;

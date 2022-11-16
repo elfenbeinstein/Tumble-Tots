@@ -86,6 +86,14 @@ public class NetworkManagerLobby : NetworkManager
         else if(remainingTime == 0) 
         { 
             GameObject.FindGameObjectWithTag("CountDown").GetComponent<TextMeshProUGUI>().text = "GO!";
+
+            // activate platforms so they start at the same time
+            GameObject[] platforms = GameObject.FindGameObjectsWithTag("MovingPlatform");
+            foreach(GameObject platform in platforms)
+            {
+                platform.GetComponent<MovingPlatformT>().Go();
+            }
+
             EventSystem.Instance.Fire("AUDIO", "start");
         }
         if(remainingTime == -1) { Destroy(GameObject.FindGameObjectWithTag("CountDown")); return; }

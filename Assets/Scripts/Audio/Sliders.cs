@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// handles the two sliders for the SFX and Music volume
+/// </summary>
+
 public class Sliders : MonoBehaviour
 {
     [SerializeField] private Slider sliderSFX;
